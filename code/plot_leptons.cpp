@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <TROOT.h>
+#include <cstdlib>
 #include "plot.h"
 
 
@@ -48,7 +49,12 @@ int main(){
 			*y_label{"Entries"};
     plot_hist(hist, kRed, title, x_label, y_label);
 	hist->Draw("HIST");
-	canvas->SaveAs("/afs/cern.ch/user/m/moriolpe/private/mphys_project/results/jet_number.png");
+	const char* cwd = std::getenv("PWD");
+	const char* relative_path = "../results/trial.png";
+	size_t full_path_length = std::strlen(cwd) + 2 + std::strlen(relative_path);
+	char full_path[full_path_length];
+	std::snprintf(full_path, full_path_length, "%s/%s", cwd, relative_path);
+	canvas->SaveAs(full_path);
 
 	return 0;
 }

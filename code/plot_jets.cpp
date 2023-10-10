@@ -8,10 +8,12 @@
 #include <TROOT.h>
 #include <TLegend.h>
 #include <vector>
+#include <cstdlib>
 #include "plot.h"
 
 
 int main(){
+
 	/* Open data*/
 	TFile *f = new TFile("/eos/home-v/vvecchio/cjets_calib/user.vvecchio.601229.PhPy8EG.DAOD_PHYS.e8453_s3873_r13829_p5631.SVmass6Julyttbar22_output_pflow_root/user.vvecchio.33977303._000001.output_pflow.root","READ");
 	TTree *nominal = (TTree*)f->Get("nominal");
@@ -19,14 +21,14 @@ int main(){
     /* Create variable and assign address */
 	std::vector<float> *variable = nullptr;
 	std::vector<int> *flavour = nullptr;
-	nominal->SetBranchAddress("jet_GN120220509",&variable);
+	nominal->SetBranchAddress("klfitter_logLikelihood",&variable);
 	nominal->SetBranchAddress("jet_truthflav", &flavour);
 
     /* Generete canvas and histograms */
 	TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600); 
-	TH1F *b_hist = new TH1F("b_hist","b jets",50,-8,16);
-	TH1F *c_hist = new TH1F("c_hist","c jets",50,-8,16);
-	TH1F *l_hist = new TH1F("l_hist","light jets",50,-8,1);
+	TH1F *b_hist = new TH1F("b_hist","b jets",60,-80,-20);
+	TH1F *c_hist = new TH1F("c_hist","c jets",60,-80,-20);
+	TH1F *l_hist = new TH1F("l_hist","light jets",60,-80,-20);
 	std::vector<TH1F*> histograms{l_hist, c_hist, b_hist};
 
 	Long64_t nentries = nominal->GetEntries();
@@ -49,8 +51,8 @@ int main(){
 	canvas->SetGrid();
 
 	/* Format histograms*/
-	char 	*title{"Jet GN Discriminant Distribution"},
-			*x_label{"GN Discriminant"},
+	char 	*title{"Jet KLFitter Likelihood Distribution"},
+			*x_label{"ln(Likelihood)"},
 			*y_label{"Entries"};
 	plot_hist(histograms[0], kRed, title, x_label, y_label);
 	plot_hist(histograms[1], kGreen, title, x_label, y_label);
@@ -66,7 +68,12 @@ int main(){
 	c_hist->Draw("HIST same");
 	b_hist->Draw("HIST same");
 	legend->Draw("same");
-	canvas->SaveAs("/afs/cern.ch/user/m/moriolpe/private/mphys_project/results/jet_GN.png");
+	const char* cwd = std::getenv("PWD");
+	const char* relative_path = "../results/KLF_likelihood.png";
+	size_t full_path_length = std::strlen(cwd) + 2 + std::strlen(relative_path);
+	char full_path[full_path_length];
+	std::snprintf(full_path, full_path_length, "%s/%s", cwd, relative_path);
+	canvas->SaveAs(full_path);
 
 	return 0;
 }
