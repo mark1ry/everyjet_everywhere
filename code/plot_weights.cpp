@@ -21,25 +21,26 @@ int main(){
     /* Create variable and assign address */
 	std::vector<float> *variable = nullptr;
 	nominal->SetBranchAddress("jet_pt",&variable);
-    std::vector<Float_t>* weight = nullptr;
-    TBranch* w_branch = nominal->GetBranch("weight_mc");
-    w_branch->SetAddress(&weight);
+    Float_t weight;
+	nominal->SetBranchAddress("weight_mc",&weight);
+    
 
     /* Generete canvas and histograms */
 	TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600); 
-	TH1F *w_hist = new TH1F("w_hist","Weighted",70,0,350);
-	TH1F *nw_hist = new TH1F("nw_hist","Not-Weighted",70,0,350);
+	TH1F *w_hist = new TH1F("w_hist","Weighted",70,-3000,3500);
+	TH1F *nw_hist = new TH1F("nw_hist","Not-Weighted",70,-3000,3500);
 	std::vector<TH1F*> histograms{nw_hist, w_hist};
 
 	Long64_t nentries = nominal->GetEntries();
 	for (Long64_t i=0;i<nentries;i++) {
       	nominal->GetEntry(i);
-
-		int length = variable->size();
+        histograms[0]->Fill(weight);
+        histograms[1]->Fill(weight);
+		/*int length = variable->size();
 		for (int j=0;j<length;j++){
 			histograms[0]->Fill((*variable)[j]/1000);
-			histograms[1]->Fill((*variable)[j]/1000, (*weight)[j]);
-		}
+			histograms[1]->Fill((*variable)[j]/1000, weight);
+		}*/
 	}
 
 	/* Format canvas */
