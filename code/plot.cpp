@@ -36,7 +36,7 @@ void plot_hist(TH1F* hist, EColor const color, char* const title, char* const x_
 	hist->GetYaxis()->SetNdivisions(10,0,0);
 	hist->GetYaxis()->SetLabelOffset(0.01);
 	hist->GetYaxis()->SetTitleOffset(1.3);
-	hist->GetYaxis()->SetRangeUser(0, 0.15);
+	hist->GetYaxis()->SetRangeUser(0, 0.145);
 
     return;
 }

@@ -18,20 +18,23 @@ int main(){
 	TTree *nominal = (TTree*)f->Get("nominal");
 
     /* Create variable and assign address */
-	std::vector<float> *variable = nullptr;
-	nominal->SetBranchAddress("jet_pt",&variable);
+	Float_t variable;
+	Float_t weight;
+
+	nominal->SetBranchAddress("met_met",&variable);
+	nominal->SetBranchAddress("weight_mc",&weight);
 
     /* Generete canvas and histogram */
 	TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600); 
-	TH1F *hist   = new TH1F("hist","lepton distribution",12,0,12);
+	TH1F *hist   = new TH1F("hist","Missing energy distribution",50,0,500);
 
     /* Fill histogram */
 	Long64_t nentries = nominal->GetEntries();
+
 	for (Long64_t i=0;i<nentries;i++) {
       	nominal->GetEntry(i);
 
-		int length = variable->size();
-		hist->Fill(length);
+		hist->Fill(variable/1000, weight);
 	
 	}
 
@@ -44,13 +47,13 @@ int main(){
 	canvas->Update();
 
     /* Format histogram, draw and save */
-	char 	*title{"Number of Jets Distribution"},
-			*x_label{"Number of jets"},
+	char 	*title{"Weighted Transverse Missing Energy Distribution"},
+			*x_label{"E_T (GeV)"},
 			*y_label{"Entries"};
     plot_hist(hist, kRed, title, x_label, y_label);
 	hist->Draw("HIST");
 	const char* cwd = std::getenv("PWD");
-	const char* relative_path = "../results/trial.png";
+	const char* relative_path = "../results/weighted/weighted_ET.png";
 	size_t full_path_length = std::strlen(cwd) + 2 + std::strlen(relative_path);
 	char full_path[full_path_length];
 	std::snprintf(full_path, full_path_length, "%s/%s", cwd, relative_path);

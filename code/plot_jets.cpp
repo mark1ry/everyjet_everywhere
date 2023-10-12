@@ -22,14 +22,17 @@ int main(){
     /* Create variable and assign address */
 	std::vector<float> *variable = nullptr;
 	std::vector<int> *flavour = nullptr;
-	nominal->SetBranchAddress("klfitter_logLikelihood",&variable);
+	Float_t weight;
+
+	nominal->SetBranchAddress("jet_SV_mass",&variable);
 	nominal->SetBranchAddress("jet_truthflav", &flavour);
+	nominal->SetBranchAddress("weight_mc",&weight);
 
     /* Generete canvas and histograms */
 	TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600); 
-	TH1F *b_hist = new TH1F("b_hist","b jets",60,-80,-20);
-	TH1F *c_hist = new TH1F("c_hist","c jets",60,-80,-20);
-	TH1F *l_hist = new TH1F("l_hist","light jets",60,-80,-20);
+	TH1F *b_hist = new TH1F("b_hist","b jets",70,0,6);
+	TH1F *c_hist = new TH1F("c_hist","c jets",70,0,6);
+	TH1F *l_hist = new TH1F("l_hist","light jets",70,0,6);
 	std::vector<TH1F*> histograms{l_hist, c_hist, b_hist};
 
 	Long64_t nentries = nominal->GetEntries();
@@ -38,9 +41,9 @@ int main(){
 
 		int length = variable->size();
 		for (int j=0;j<length;j++){
-			if ((*flavour)[j]==0) histograms[0]->Fill((*variable)[j]);
-			else if ((*flavour)[j]==4) histograms[1]->Fill((*variable)[j]);
-			else if ((*flavour)[j]==5) histograms[2]->Fill((*variable)[j]);
+			if ((*flavour)[j]==0) histograms[0]->Fill((*variable)[j]/1000, weight);
+			else if ((*flavour)[j]==4) histograms[1]->Fill((*variable)[j]/1000, weight);
+			else if ((*flavour)[j]==5) histograms[2]->Fill((*variable)[j]/1000, weight);
 		}
 	}
 
@@ -52,8 +55,8 @@ int main(){
 	canvas->SetGrid();
 
 	/* Format histograms*/
-	char 	*title{"Jet KLFitter Likelihood Distribution"},
-			*x_label{"ln(Likelihood)"},
+	char 	*title{"Weighted Jet Secondary Vertex Mass Distribution"},
+			*x_label{"SV Mass (GeV/c^2)"},
 			*y_label{"Entries"};
 	plot_hist(histograms[0], kRed, title, x_label, y_label);
 	plot_hist(histograms[1], kGreen, title, x_label, y_label);
@@ -70,7 +73,7 @@ int main(){
 	b_hist->Draw("HIST same");
 	legend->Draw("same");
 	const char* cwd = std::getenv("PWD");
-	const char* relative_path = "../results/KLF_likelihood.png";
+	const char* relative_path = "../results/weighted/weighted_jet_svmass.png";
 	size_t full_path_length = std::strlen(cwd) + 2 + std::strlen(relative_path);
 	char full_path[full_path_length];
 	std::snprintf(full_path, full_path_length, "%s/%s", cwd, relative_path);
