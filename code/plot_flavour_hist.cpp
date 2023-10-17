@@ -35,15 +35,15 @@ int main(){
 	std::vector<float> *variable = nullptr;
 	std::vector<int> *flavour = nullptr;
 	Float_t weight;
-	nominal->SetBranchAddress("klfitter_logLikelihood",&variable);
+	nominal->SetBranchAddress("jet_GN120220509",&variable);
 	nominal->SetBranchAddress("jet_truthflav", &flavour);
 	nominal->SetBranchAddress("weight_mc", &weight);
 
     /* Generete canvas and histograms */
 	TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600); 
-	TH1F *b_hist = new TH1F("b_hist","b jets",50,-80,-20);
-	TH1F *c_hist = new TH1F("c_hist","c jets",50,-80,-20);
-	TH1F *l_hist = new TH1F("l_hist","light jets",50,-80,-20);
+	TH1F *b_hist = new TH1F("b_hist","b jets",50,-10,18);
+	TH1F *c_hist = new TH1F("c_hist","c jets",50,-10,18);
+	TH1F *l_hist = new TH1F("l_hist","light jets",50,-10,18);
 	std::vector<TH1F*> histograms{l_hist, c_hist, b_hist};
 
 	Long64_t nentries = nominal->GetEntries();
@@ -66,12 +66,12 @@ int main(){
 	canvas->SetGrid();
 
 	/* Format histograms*/
-	char 	*title{"Jet KLFitter Likelihood Distribution"},
-			*x_label{"ln(Likelihood)"},
+	char 	*title{"Weighted Jet GN Discriminant Distribution"},
+			*x_label{"GN Discriminant"},
 			*y_label{"Entries"};
-	format_hist(histograms[0], kRed, title, x_label, y_label, 0.18);
-	format_hist(histograms[1], kGreen, title, x_label, y_label, 0.18);
-	format_hist(histograms[2], kBlue, title, x_label, y_label, 0.18);
+	format_hist(histograms[0], kRed, title, x_label, y_label, 0.2);
+	format_hist(histograms[1], kGreen, title, x_label, y_label, 0.2);
+	format_hist(histograms[2], kBlue, title, x_label, y_label, 0.2);
 
 	/* Create legend */
     TLegend *legend = new TLegend(0.7, 0.68, 0.9, 0.88);
@@ -84,7 +84,7 @@ int main(){
 	b_hist->Draw("HIST same");
 	legend->Draw("same");
 	const char* cwd = std::getenv("PWD");
-	const char* relative_path = "../results/weighted/KLF_likelihood.png";
+	const char* relative_path = "../results/weighted/jet_GN.png";
 	size_t full_path_length = std::strlen(cwd) + 2 + std::strlen(relative_path);
 	char full_path[full_path_length];
 	std::snprintf(full_path, full_path_length, "%s/%s", cwd, relative_path);
