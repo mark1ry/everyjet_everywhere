@@ -76,6 +76,9 @@ void format_legend(TLegend* legend, std::vector<char*> const labels, std::vector
 		legend->AddEntry(histograms[i], labels[i], "l");
 	}
 
+	// Increase the legend size
+    legend->SetBorderSize(1.5); // Set the border size
+    legend->SetFillColor(0); // Set the fill color to transparent
 	legend->SetTextSize(text_size);
 	legend->SetTextAlign(text_align);
 }
@@ -89,5 +92,5 @@ void format_legend(TLegend* legend, std::vector<char*> const labels, std::vector
  *		Marc Oriol 12th October 2023
  */
 void format_legend(TLegend* legend, std::vector<char*> const labels, std::vector<TH1F*> const histograms) {
-	format_legend(legend, labels, histograms, 0.04, 12);
+	format_legend(legend, labels, histograms, 0.035, 12);
 }

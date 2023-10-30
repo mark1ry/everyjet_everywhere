@@ -14,6 +14,7 @@
 /* IMPORT STATEMENTS */
 #include <TFile.h>
 #include <TTree.h>
+#include <TChain.h>
 #include <THStack.h>
 #include <TCanvas.h>
 #include <TH1F.h>
@@ -24,6 +25,8 @@
 #include <vector>
 #include <cstdlib>
 #include "histogram.h"
+#include <math.h>
+#include <TLorentzVector.h>
 
 /* MAIN CODE */
 int main(){
@@ -35,15 +38,17 @@ int main(){
 	std::vector<float> *variable = nullptr;
 	std::vector<int> *flavour = nullptr;
 	Float_t weight;
-	nominal->SetBranchAddress("jet_GN120220509",&variable);
+
+	nominal->SetBranchAddress("jet_phi",&variable);
 	nominal->SetBranchAddress("jet_truthflav", &flavour);
 	nominal->SetBranchAddress("weight_mc", &weight);
-
+	
     /* Generete canvas and histograms */
 	TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600); 
-	TH1F *b_hist = new TH1F("b_hist","b jets",50,-10,18);
-	TH1F *c_hist = new TH1F("c_hist","c jets",50,-10,18);
-	TH1F *l_hist = new TH1F("l_hist","light jets",50,-10,18);
+	TH1F *b_hist = new TH1F("b_hist","b jets",50,-5,5);
+	TH1F *c_hist = new TH1F("c_hist","c jets",50,-5,5);
+	TH1F *l_hist = new TH1F("l_hist","light jets",50,-5,5);
+
 	std::vector<TH1F*> histograms{l_hist, c_hist, b_hist};
 
 	Long64_t nentries = nominal->GetEntries();
@@ -66,12 +71,12 @@ int main(){
 	canvas->SetGrid();
 
 	/* Format histograms*/
-	char 	*title{"Weighted Jet GN Discriminant Distribution"},
-			*x_label{"GN Discriminant"},
+	char 	*title{"Weighted Jet Azimuthal Angle Distribution"},
+			*x_label{"Phi"},
 			*y_label{"Entries"};
-	format_hist(histograms[0], kRed, title, x_label, y_label, 0.2);
-	format_hist(histograms[1], kGreen, title, x_label, y_label, 0.2);
-	format_hist(histograms[2], kBlue, title, x_label, y_label, 0.2);
+	format_hist(histograms[0], kRed, title, x_label, y_label, 0.07);
+	format_hist(histograms[1], kGreen, title, x_label, y_label, 0.07);
+	format_hist(histograms[2], kBlue, title, x_label, y_label, 0.07);
 
 	/* Create legend */
     TLegend *legend = new TLegend(0.7, 0.68, 0.9, 0.88);
@@ -84,7 +89,7 @@ int main(){
 	b_hist->Draw("HIST same");
 	legend->Draw("same");
 	const char* cwd = std::getenv("PWD");
-	const char* relative_path = "../results/weighted/jet_GN.png";
+	const char* relative_path = "../results/weighted/jet_phi.png";
 	size_t full_path_length = std::strlen(cwd) + 2 + std::strlen(relative_path);
 	char full_path[full_path_length];
 	std::snprintf(full_path, full_path_length, "%s/%s", cwd, relative_path);
