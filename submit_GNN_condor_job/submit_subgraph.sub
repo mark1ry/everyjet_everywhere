@@ -1,0 +1,11 @@
+executable              = job_subgraph.sh
+arguments               = $(ClusterId) $(ProcId)
+output                  = output/job.$(ClusterId).$(ProcId).out
+error                   = error/job.$(ClusterId).$(ProcId).err
+log                     = log/job.$(ClusterId).log
+should_transfer_files   = YES
+transfer_input_files    = job_subgraph.sh, subgraph-contraction-ttbar
+when_to_transfer_output = ON_EXIT
+request_CPUs = 12
++JobFlavour = "nextweek"
+queue 1
