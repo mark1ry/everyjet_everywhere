@@ -518,6 +518,7 @@ int main () {
     
     /* CREATE ALL BRANCHES IN THE OUTPUT TREE */
     std::vector<int> jet_match_info;
+	Int_t njets;
     output_tree->Branch("mc_generator_weights", &mc_generator_weights);
     output_tree->Branch("weight_mc", &weight);
     output_tree->Branch("weight_pileup", &weight_pileup);
@@ -603,6 +604,7 @@ int main () {
     output_tree->Branch("new_mujets_dl1d_2022", &new_mujets_dl1d_2022);
     output_tree->Branch("jet_SV_mass", &jet_SV_mass);
     output_tree->Branch("jet_truthMatched", &jet_match_info);
+	output_tree->Branch("njets", &njets);
 
     /* CREATE HISTOGRAMS */
     int number_of_histograms = 16;
@@ -703,7 +705,7 @@ int main () {
         truth_lorentz_v[3] = truth_q2_w;
 
         /* Create nominal Lorentz vectors */
-        int njets = nominal_jet_pt->size();
+        njets = nominal_jet_pt->size();
         TLorentzVector* nominal_jet_lorentz_v = new TLorentzVector[njets];
         for (int j{0}; j<njets; j++) {
             TLorentzVector temp;
