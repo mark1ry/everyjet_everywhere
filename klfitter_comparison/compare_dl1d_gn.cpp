@@ -78,6 +78,17 @@ int main () {
     unsigned long nw_3_btags = 0;
     unsigned long nw_more_btags = 0;
     
+    int Gn_0_btags = 0;
+    int Gn_1_btags = 0;
+    int Gn_2_btags = 0;
+    int Gn_3_btags = 0;
+    int Gn_more_btags = 0;
+    unsigned long Gnw_0_btags = 0;
+    unsigned long Gnw_1_btags = 0;
+    unsigned long Gnw_2_btags = 0;
+    unsigned long Gnw_3_btags = 0;
+    unsigned long Gnw_more_btags = 0;
+    
     std::cout << "The total number of events is " << nentries << std::endl;
     bool manual = false;
     
@@ -88,27 +99,42 @@ int main () {
         
         nominal->GetEntry(i);
         updateProgressBar(i+1, nentries);
-        if (mujets_dl1d_2022 || mujets_2022_dl1d_lowPt || ejets_dl1d_2022 || ejets_2022_dl1d_lowPt) {
-            counter += 1;
-            njets = nominal_jet_pt->size();
-            b_tagged_jets = 0;
-            for (int j{0}; j<njets; j++) {
-                if (manual) {
-                    if ((*jet_DL1dv01)[j]>4.854) {
-                        b_tagged_jets += 1;
-                    }
-                } else {
-                    if ((*jet_isbtagged_DL1dv01_60)[j]) {
-                        b_tagged_jets += 1;
-                    }
+        //if (mujets_dl1d_2022 || mujets_2022_dl1d_lowPt || ejets_dl1d_2022 || ejets_2022_dl1d_lowPt) {
+        counter += 1;
+        njets = nominal_jet_pt->size();
+        b_tagged_jets = 0;
+        for (int j{0}; j<njets; j++) {
+            if (manual) {
+                if ((*jet_DL1dv01)[j]>4.854) {
+                    b_tagged_jets += 1;
+                }
+            } else {
+                if ((*jet_isbtagged_DL1dv01_60)[j]) {
+                    b_tagged_jets += 1;
                 }
             }
-            if (b_tagged_jets == 0) {n_0_btags += 1; nw_0_btags += abs(weight);}
-            else if (b_tagged_jets == 1) {n_1_btags += 1; nw_1_btags += abs(weight);}
-            else if (b_tagged_jets == 2) {n_2_btags += 1; nw_2_btags += abs(weight);}
-            else if (b_tagged_jets == 3) {n_3_btags += 1; nw_3_btags += abs(weight);}
-            else {n_more_btags += 1; nw_more_btags += abs(weight);}
         }
+        if (b_tagged_jets == 0) {n_0_btags += 1; nw_0_btags += abs(weight);}
+        else if (b_tagged_jets == 1) {n_1_btags += 1; nw_1_btags += abs(weight);}
+        else if (b_tagged_jets == 2) {n_2_btags += 1; nw_2_btags += abs(weight);}
+        else if (b_tagged_jets == 3) {n_3_btags += 1; nw_3_btags += abs(weight);}
+        else {n_more_btags += 1; nw_more_btags += abs(weight);}
+        
+        if (b_tagged_jets == 0) {
+            b_tagged_jets = 0;
+            for (int k{0}; k<njets; k++) {
+                if ((*jet_isbtagged_GN120220509_60)[k]) { b_tagged_jets += 1; }
+            }
+            if (b_tagged_jets == 0) {Gn_0_btags += 1; Gnw_0_btags += abs(weight);}
+            else if (b_tagged_jets == 1) {Gn_1_btags += 1; Gnw_1_btags += abs(weight);}
+            else if (b_tagged_jets == 2) {Gn_2_btags += 1; Gnw_2_btags += abs(weight);}
+            else if (b_tagged_jets == 3) {Gn_3_btags += 1; Gnw_3_btags += abs(weight);}
+            else {Gn_more_btags += 1; Gnw_more_btags += abs(weight);}
+            
+        }
+                
+                
+        //}
     }
     
     std::cout << std::endl << "number of selected events found: " << counter << std::endl;
@@ -126,6 +152,22 @@ int main () {
     std::cout << "2 b-tags:  " << nw_2_btags << std::endl;
     std::cout << "3 b-tags:  " << nw_3_btags << std::endl;
     std::cout << "4+ b-tags: " << nw_more_btags << std::endl;
+    
+    std::cout << std::endl << "EVENTS WITH 0 DL1d B-TAGGINGS:" << std::endl;   
+    
+    std::cout << std::endl << "B-TAGGED JETS DISTRIBUTION:" << std::endl;
+    std::cout << "0 b-tags:  " << Gn_0_btags << std::endl;
+    std::cout << "1 b-tag:   " << Gn_1_btags << std::endl;
+    std::cout << "2 b-tags:  " << Gn_2_btags << std::endl;
+    std::cout << "3 b-tags:  " << Gn_3_btags << std::endl;
+    std::cout << "4+ b-tags: " << Gn_more_btags << std::endl;
+    
+    std::cout << std::endl << "WEIGHTED B-TAGGED JETS DISTRIBUTION:" << std::endl;
+    std::cout << "0 b-tags:  " << Gnw_0_btags << std::endl;
+    std::cout << "1 b-tag:   " << Gnw_1_btags << std::endl;
+    std::cout << "2 b-tags:  " << Gnw_2_btags << std::endl;
+    std::cout << "3 b-tags:  " << Gnw_3_btags << std::endl;
+    std::cout << "4+ b-tags: " << Gnw_more_btags << std::endl;
     
     return 0;
 }
