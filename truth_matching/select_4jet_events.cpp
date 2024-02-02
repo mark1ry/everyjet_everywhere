@@ -36,7 +36,7 @@ int main () {
 	TTree *matched = (TTree*)input_file->Get("matched");
 
     /* OUTPUT FILE AND TREE */
-    TFile* output_file = new TFile("/eos/user/m/moriolpe/mphys_project/matched_exactly4jets_calib_ttbar.root", "RECREATE");
+    TFile* output_file = new TFile("/eos/user/m/moriolpe/mphys_project/matched_exactly4jets_small.root", "RECREATE");
     TTree* output_tree = new TTree("matched", "matched");
 
 
@@ -308,7 +308,7 @@ int main () {
     Long64_t nentries = matched->GetEntries();
     std::cout << "The total number of events is " << nentries << std::endl;
 
-    for (Long64_t i{0}; i<nentries; i++) {
+    for (Long64_t i{0}; i<3000; i++) {
         matched->GetEntry(i);
         if (nominal_jet_pt->size() == 4) {
             njets = nominal_jet_pt->size();
