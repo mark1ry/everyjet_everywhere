@@ -38,9 +38,8 @@ int main () {
     float_t weight;
     std::vector<float>* nominal_jet_pt = 0;
     std::vector<char>* jet_isbtagged_DL1dv01_60 = 0;
-    std::vector<float>* jet_DL1dv01 = 0;
     std::vector<float>* jet_isbtagged_GN120220509_60 = 0;
-    std::vector<unsigned int>* klfitter_model_bhad_jetIndex = 0;
+    std::vector<float>* klfitter_logLikelihood = 0;
     
     Int_t mujets_dl1d_2022;
     Int_t mujets_2022_dl1d_lowPt;
@@ -51,8 +50,7 @@ int main () {
     nominal->SetBranchAddress("jet_pt", &nominal_jet_pt); 
     nominal->SetBranchAddress("jet_isbtagged_DL1dv01_60", &jet_isbtagged_DL1dv01_60);
     nominal->SetBranchAddress("jet_isbtagged_GN120220509_60", &jet_isbtagged_GN120220509_60);
-    nominal->SetBranchAddress("jet_DL1dv01", &jet_DL1dv01);
-    nominal->SetBranchAddress("klfitter_model_bhad_jetIndex", &klfitter_model_bhad_jetIndex);
+    nominal->SetBranchAddress("klfitter_logLikelihood", &klfitter_logLikelihood);
 
     nominal->SetBranchAddress("mujets_dl1d_2022", &mujets_dl1d_2022);
     nominal->SetBranchAddress("mujets_2022_dl1d_lowPt", &mujets_2022_dl1d_lowPt);
@@ -67,65 +65,46 @@ int main () {
     Long64_t nentries = nominal->GetEntries();
     int njets = 0;
     int b_tagged_jets = 0;
-    int n_0_btags = 0;
-    int n_1_btags = 0;
-    int n_2_btags = 0;
-    int n_3_btags = 0;
-    int n_more_btags = 0;
-    unsigned long nw_0_btags = 0;
-    unsigned long nw_1_btags = 0;
-    unsigned long nw_2_btags = 0;
-    unsigned long nw_3_btags = 0;
-    unsigned long nw_more_btags = 0;
+    std::vector<int> jets_freq = {0, 0, 0, 0, 0};
+    std::vector<int> solution_frequency_noGN = {0, 0, 0};
     
     std::cout << "The total number of events is " << nentries << std::endl;
     bool manual = false;
     
     int counter = 0;
-    
+    int value;
     for(Long64_t i=0; i<nentries; i++) {
         if (i==0) { std::cout << "Entered the loop" << std::endl; }
         
         nominal->GetEntry(i);
         updateProgressBar(i+1, nentries);
+        
         if (mujets_dl1d_2022 || mujets_2022_dl1d_lowPt || ejets_dl1d_2022 || ejets_2022_dl1d_lowPt) {
-            counter += 1;
             njets = nominal_jet_pt->size();
-            b_tagged_jets = 0;
-            for (int j{0}; j<njets; j++) {
-                if (manual) {
-                    if ((*jet_DL1dv01)[j]>4.854) {
-                        b_tagged_jets += 1;
-                    }
-                } else {
+            if (njets == 4) { jets_freq[0] += 1;}
+            if (njets == 5) { jets_freq[1] += 1;}
+            if (njets == 6) { jets_freq[2] += 1;}
+            if (njets == 7) { jets_freq[3] += 1;}
+            else { jets_freq[4] += 1; }
+            
+            
+            /*
+            if (klfitter_logLikelihood->size()!=0) {
+                for (int j{0}; j<njets; j++) {
                     if ((*jet_isbtagged_DL1dv01_60)[j]) {
-                        b_tagged_jets += 1;
-                    }
+                        value = 1;
+                    } else { value = 0;}
+                    std::cout << (*nominal_jet_pt)[j] << " (" << value << ")  ";
                 }
-            }
-            if (b_tagged_jets == 0) {n_0_btags += 1; nw_0_btags += abs(weight);}
-            else if (b_tagged_jets == 1) {n_1_btags += 1; nw_1_btags += abs(weight);}
-            else if (b_tagged_jets == 2) {n_2_btags += 1; nw_2_btags += abs(weight);}
-            else if (b_tagged_jets == 3) {n_3_btags += 1; nw_3_btags += abs(weight);}
-            else {n_more_btags += 1; nw_more_btags += abs(weight);}
+                std::cout << std::endl;
+                counter += 1;
+            */
         }
     }
-    
-    std::cout << std::endl << "number of selected events found: " << counter << std::endl;
-    
-    std::cout << std::endl << "B-TAGGED JETS DISTRIBUTION:" << std::endl;
-    std::cout << "0 b-tags:  " << n_0_btags << std::endl;
-    std::cout << "1 b-tag:   " << n_1_btags << std::endl;
-    std::cout << "2 b-tags:  " << n_2_btags << std::endl;
-    std::cout << "3 b-tags:  " << n_3_btags << std::endl;
-    std::cout << "4+ b-tags: " << n_more_btags << std::endl;
-    
-    std::cout << std::endl << "WEIGHTED B-TAGGED JETS DISTRIBUTION:" << std::endl;
-    std::cout << "0 b-tags:  " << nw_0_btags << std::endl;
-    std::cout << "1 b-tag:   " << nw_1_btags << std::endl;
-    std::cout << "2 b-tags:  " << nw_2_btags << std::endl;
-    std::cout << "3 b-tags:  " << nw_3_btags << std::endl;
-    std::cout << "4+ b-tags: " << nw_more_btags << std::endl;
+    std::cout << std::endl;
+    for( int j{0}; j<5; j++ ) {
+        std::cout << jets_freq[j] << std::endl;
+    }
     
     return 0;
 }
