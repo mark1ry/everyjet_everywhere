@@ -353,7 +353,7 @@ int main () {
     truth = SetTruthTree(file_path);
 
     /* OUTPUT FILE AND TREE */
-    TFile* output_file = new TFile("/eos/user/m/moriolpe/mphys_project/root_files/matched_klf_ordered.root", "RECREATE");
+    TFile* output_file = new TFile("/eos/user/m/moriolpe/mphys_project/root_files/matched_dl1dselected_alljets.root", "RECREATE");
     TTree* output_tree = new TTree("matched", "matched");
 
 
@@ -533,7 +533,6 @@ int main () {
     /* CREATE ALL BRANCHES IN THE OUTPUT TREE */
     std::vector<int> jet_match_info;
     Int_t njets;
-    std::vector<int> jet_order_pt;
     
     output_tree->Branch("mc_generator_weights", &mc_generator_weights);
     output_tree->Branch("weight_mc", &weight);
@@ -583,7 +582,6 @@ int main () {
     output_tree->Branch("jet_eta", &nominal_jet_eta);
     output_tree->Branch("jet_phi", &nominal_jet_phi);
     output_tree->Branch("jet_e", &nominal_jet_e);
-    output_tree->Branch("jet_order_pt", &jet_order_pt);
     output_tree->Branch("jet_truthflav", &jet_truthflav);   
     output_tree->Branch("jet_truthPartonLabel", &jet_truthPartonLabel);   
     output_tree->Branch("jet_truthflavExtended", &jet_truthflavExtended); 
@@ -655,6 +653,7 @@ int main () {
     Double_t DeltaR_max = 0.4;
     int selected = 0;
     int matched = 0;
+	bool tagged = 0;
     std::cout << "The total number of events is " << nentries << std::endl;
     
     for(Long64_t i=0; i<nentries; i++) {
@@ -664,6 +663,7 @@ int main () {
         truth->GetEntryWithIndex(runNumber,eventNumber);
         
         updateProgressBar(i+1, nentries);
+		njets = nominal_jet_pt->size();
 
         if (runNumber!=MC_runNumber) continue;
         if (eventNumber!=MC_eventNumber) continue;
@@ -672,11 +672,15 @@ int main () {
         if (!select_hadronic_decay(&W_t_is_hadronic, &W_tbar_is_hadronic)) continue;
 
         if (!selection_criteria_truth(W_t_is_hadronic, W_tbar_is_hadronic)) continue;
-       
-        if (!mujets_dl1d_2022 && !mujets_2022_dl1d_lowPt && !ejets_2022_dl1d && !ejets_2022_dl1d_lowPt) continue;
-        selected+=1;
-
         
+		tagged = false;
+	    for (int jet{0}; jet<njets; jet++) {
+		    if ((*jet_isbtagged_DL1dv01_60)[jet] == true){
+			    tagged = true;
+			}
+	    }
+        if (!tagged) continue;
+        selected+=1;
 
         /* CREATE TRUTH LORENTZ VECTORS */
         TLorentzVector truth_b_t;
@@ -724,7 +728,6 @@ int main () {
         truth_lorentz_v[3] = truth_q2_w;
 
         /* Create nominal Lorentz vectors */
-        njets = nominal_jet_pt->size();
         TLorentzVector* nominal_jet_lorentz_v = new TLorentzVector[njets];
         for (int j{0}; j<njets; j++) {
             TLorentzVector temp;
@@ -766,7 +769,6 @@ int main () {
         if(sort_algorithm(jet_match_holder, match_indices, match_deltas, njets)) {
             matched +=1;
             jet_match_info = array_to_vector(jet_match_holder, njets);
-            jet_order_pt = find_pt_order(*nominal_jet_pt);
             output_tree->Fill();
 
             /* FILL MC HISTOGRAMS */

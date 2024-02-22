@@ -79,7 +79,7 @@ int main () {
         nominal->GetEntry(i);
         updateProgressBar(i+1, nentries);
         
-        if (mujets_dl1d_2022 || mujets_2022_dl1d_lowPt || ejets_dl1d_2022 || ejets_2022_dl1d_lowPt) {
+        //if (mujets_dl1d_2022 || mujets_2022_dl1d_lowPt || ejets_dl1d_2022 || ejets_2022_dl1d_lowPt) {
             njets = nominal_jet_pt->size();
             if (njets == 4) { jets_freq[0] += 1;}
             if (njets == 5) { jets_freq[1] += 1;}
@@ -98,8 +98,8 @@ int main () {
                 }
                 std::cout << std::endl;
                 counter += 1;
-            */
-        }
+            
+        }*/
     }
     std::cout << std::endl;
     for( int j{0}; j<5; j++ ) {
