@@ -657,13 +657,13 @@ int main () {
         if (!selection_criteria_truth(W_t_is_hadronic, W_tbar_is_hadronic)) continue;
         counter+=1;
 
-        
-
         /* CREATE TRUTH LORENTZ VECTORS */
         TLorentzVector truth_b_t;
         truth_b_t.SetPtEtaPhiM(MC_b_t_pt, MC_b_t_eta, MC_b_t_phi, MC_b_t_mass);
         TLorentzVector truth_b_tbar;
         truth_b_tbar.SetPtEtaPhiM(MC_b_tbar_pt, MC_b_tbar_eta, MC_b_tbar_phi, MC_b_tbar_mass);
+        TLorentzVector truth_b_had;
+        TLorentzVector truth_b_lep;
         TLorentzVector truth_q1_w;
         TLorentzVector truth_q2_w;
         TLorentzVector truth_l_w;
@@ -671,16 +671,20 @@ int main () {
         if (W_t_is_hadronic) {
             truth_q1_w.SetPtEtaPhiM(MC_W1_t_pt, MC_W1_t_eta, MC_W1_t_phi, MC_W1_t_mass);
             truth_q2_w.SetPtEtaPhiM(MC_W2_t_pt, MC_W2_t_eta, MC_W2_t_phi, MC_W2_t_mass);
+            truth_b_had = truth_b_t;
         } else {
             truth_n_w.SetPtEtaPhiM(MC_W1_t_pt, MC_W1_t_eta, MC_W1_t_phi, MC_W1_t_mass);
             truth_l_w.SetPtEtaPhiM(MC_W2_t_pt, MC_W2_t_eta, MC_W2_t_phi, MC_W2_t_mass);
+            truth_b_lep = truth_b_t;
         }
         if (W_tbar_is_hadronic) {
             truth_q1_w.SetPtEtaPhiM(MC_W1_tbar_pt, MC_W1_tbar_eta, MC_W1_tbar_phi, MC_W1_tbar_mass);
             truth_q2_w.SetPtEtaPhiM(MC_W2_tbar_pt, MC_W2_tbar_eta, MC_W2_tbar_phi, MC_W2_tbar_mass);
+            truth_b_had = truth_b_tbar;
         } else {
             truth_l_w.SetPtEtaPhiM(MC_W1_tbar_pt, MC_W1_tbar_eta, MC_W1_tbar_phi, MC_W1_tbar_mass);
             truth_n_w.SetPtEtaPhiM(MC_W2_tbar_pt, MC_W2_tbar_eta, MC_W2_tbar_phi, MC_W2_tbar_mass);
+            truth_b_lep = truth_b_tbar;
         }
         
         /* MATCH TRUTH AND NOMINAL CHARGED LEPTON */
@@ -699,8 +703,8 @@ int main () {
 
         /* RECO MATCHING WITH TRUTH */
         TLorentzVector* truth_lorentz_v = new TLorentzVector[4];
-        truth_lorentz_v[0] = truth_b_t;
-        truth_lorentz_v[1] = truth_b_tbar;
+        truth_lorentz_v[0] = truth_b_had;
+        truth_lorentz_v[1] = truth_b_lep;
         truth_lorentz_v[2] = truth_q1_w;
         truth_lorentz_v[3] = truth_q2_w;
 
