@@ -30,10 +30,10 @@ int main () {
     TFile *input_file = new TFile("/eos/user/m/moriolpe/mphys_project/root_files/matched_dl1dselected_4jets.root", "READ");
     TTree *input_tree = (TTree*)input_file->Get("matched");
 
-    TFile* output_file_1 = new TFile("/eos/user/m/moriolpe/mphys_project/matched_dl1d_4jets_even.root", "RECREATE");
-    TFile* output_file_2 = new TFile("/eos/user/m/moriolpe/mphys_project/matched_dl1d_4jets_odd.root", "RECREATE");
-    TTree* output_tree_1 = new TTree("matched", "matched");
-    TTree* output_tree_2 = new TTree("matched", "matched");
+    TFile* output_file_1 = new TFile("/eos/user/m/moriolpe/mphys_project/root_files/matched_dl1d_4jets_even.root", "RECREATE");
+    TFile* output_file_2 = new TFile("/eos/user/m/moriolpe/mphys_project/root_files/matched_dl1d_4jets_odd.root", "RECREATE");
+    TTree* output_tree_1 = new TTree("matched_even", "matched_even");
+    TTree* output_tree_2 = new TTree("matched_odd", "matched_odd");
     
     std::vector<float>* mc_generator_weights = 0;
     Float_t weight;
@@ -385,13 +385,19 @@ int main () {
     output_tree_2->SetBranchAddress("jet_truthMatched", &jet_truthMatched);
     output_tree_2->SetBranchAddress("njets", &njets);
     
-    Long64_t nentries = matched->GetEntries();
+    Long64_t nentries = input_tree->GetEntries();
+    std::cout << std::endl << "THE TOTAL NUMBER OF ENTRIES IS " << nentries << std::endl;
     for (Long64_t i=0; i<nentries; i++) {
-        matched->GetEntry(i);
+        input_tree->GetEntry(i);
         updateProgressBar(i+1, nentries);
 
-        if (randomRunNumber%2 == 0) output_tree_1->Fill();
-        else output_tree_2->Fill();
+        if (randomRunNumber%2 == 0) {
+            output_tree_1->Fill();
+            std::cout << std::endl << "Even";
+        } else { 
+            output_tree_2->Fill();
+            std::cout << std::endl << "Odd";
+        }
     }
 
     output_file_1->cd();
