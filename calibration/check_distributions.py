@@ -43,11 +43,11 @@ def Argparser():
     return parser.parse_args()
 
 def ReadInData(settings):
-    even_data = uproot.open(settings.root_even)[settings.tree_even]
-    odd_data = uproot.open(settings.root_odd)[settings.tree_odd]
+    even_data = uproot.open(settings.even_root_path)[settings.even_tree_name]
+    odd_data = uproot.open(settings.odd_root_path)[settings.odd_tree_name]
 
-    even_reco = pd.read_pickle(settings.pkl_even)
-    odd_reco = pd.read_pickle(settings.pkl_odd)
+    even_reco = pd.read_pickle(settings.even_pkl_path)
+    odd_reco = pd.read_pickle(settings.odd_pkl_path)
 
     return [even_data, odd_data], [even_reco, odd_reco]
 
@@ -165,16 +165,16 @@ def SavePlots(b_enhanced, cl_enhanced, settings) -> None:
     for index, element in enumerate(['A', 'B']):
         title = "B-ENHANCED. METHOD " + element + ". " + settings.plot_extra_info
         path = settings.plots_path + "/benhanced_" + element.lower()
-        path = path + "_" + settings.extra_info.lower() if settings.plot_extra_info!=None else path
-        plot.plotDistributions(b_enhanced[index], title, path+"_stacked.png", plot.plotVariableStacked)
-        plot.plotDistributions(b_enhanced[index], title, path+"_independent.png", plot.plotVariableIndependent)
+        path = path + "_" + settings.plot_extra_info.lower() if settings.plot_extra_info!="" else pat
+        plot.plotDistributions(b_enhanced[index], title, path+"_stacked.png", plot.plotVariableStacked, log_scale=settings.log_scale)
+        plot.plotDistributions(b_enhanced[index], title, path+"_independent.png", plot.plotVariableIndependent, log_scale=settings.log_scale)
 
     for index, element in enumerate(['A', 'B']):
         title = "C/L-ENHANCED. METHOD " + element + ". " + settings.plot_extra_info
-        path = settinfs.plots_path + "/clenhanced_" + element.lower()
-        path = path + "_" + settings.extra_info.lower() if settings.plot_extra_info!=None else path
-        plot.plotDistributions(cl_enhanced[index], title, path+"_stacked.png", plot.plotVariableStacked)
-        plot.plotDistributions(cl_enhanced[index], title, path+"_independent.png", plot.plotVariableIndependent)
+        path = settings.plots_path + "/clenhanced_" + element.lower()
+        path = path + "_" + settings.plot_extra_info.lower() if settings.plot_extra_info!="" else path
+        plot.plotDistributions(cl_enhanced[index], title, path+"_stacked.png", plot.plotVariableStacked, log_scale=settings.log_scale)
+        plot.plotDistributions(cl_enhanced[index], title, path+"_independent.png", plot.plotVariableIndependent, log_scale=settings.log_scale)
 
     return
 
@@ -205,7 +205,7 @@ def RecoDistributions():
     print("CHECKPOINT: Succesfully loaded the data")
 
     # STORE DATA IF REQUESTED
-    if settings.store_pickles:
+    if settings.output_pickle:
         b_enhanced[0].to_pickle(settings.benhA_pkl)
         b_enhanced[1].to_pickle(settings.benhB_pkl)
         cl_enhanced[0].to_pickle(settings.clenhA_pkl)
@@ -213,7 +213,7 @@ def RecoDistributions():
         print("CHECKPOINT: Successfully written the pickles")
 
     # PRODUCE PLOTS
-    if args.plots_path:
+    if settings.produce_plots:
         SavePlots(b_enhanced=b_enhanced, cl_enhanced=cl_enhanced, settings=settings)
         print("CHECKPOINT: Succesfully created the figures")
     return 0

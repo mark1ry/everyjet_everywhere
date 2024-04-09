@@ -18,6 +18,7 @@ class settings:
         self.clenhB_pkl: str = ""
         self.plots_path: str = ""
         self.plot_extra_info: str = ""
+        self.log_scale: bool = True
 
     def update_settings(self, path):
         config = json.load(path)

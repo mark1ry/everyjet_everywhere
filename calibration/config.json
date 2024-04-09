@@ -17,5 +17,6 @@
 	"clenhB_pkl":       "/eos/user/m/moriolpe/mphys_project/calibration/clenhanced_b_4jets.pkl",
 
 	"plots_path":       "/eos/user/m/moriolpe/mphys_project/trial",
-	"plot_extra_info":  ""
+	"plot_extra_info":  "",
+	"log_scale":        true
 }

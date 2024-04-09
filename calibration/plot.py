@@ -146,7 +146,7 @@ def plotResiduals(ax, data: list, bins: list, labels: list, colors: list, xticks
     return
         
         
-def plotDistributions(df, title: str, output:str, func) -> None:
+def plotDistributions(df, title: str, output:str, func, log_scale=True) -> None:
 
     nentries = len(df.index)
 
@@ -172,7 +172,7 @@ def plotDistributions(df, title: str, output:str, func) -> None:
         sv.append([x[0] for x in frame["SVmass"].to_numpy()])
 
     hist = func(ax=ax[0,1], data=sv, title="Secondary Vertex Mass Distribution", variable_name=r"SV Mass [MeV/$\it{c}$]",
-                             nbins=30, colors=colors, labels=labels, log=True)
+                             nbins=30, colors=colors, labels=labels, log=log_scale)
     plotResiduals(ax=ax[1,1], data=hist[0], bins=hist[1], labels=labels, colors=colors)
 
     # PLOT PT DISTRIBUTION
