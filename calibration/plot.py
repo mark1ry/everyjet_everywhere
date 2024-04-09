@@ -47,7 +47,7 @@ def plotFlavourDistribution(ax, data: list, nentries: int, colors: list, labels:
     return
 
 def plotVariableIndependent(ax, data: list, title: str, variable_name: str, nbins: int, colors: list, labels: list,
-                             x_max=-99, x_min=-99, xticks=None, xlabels=None) -> list:
+                             x_max=-99, x_min=-99, xticks=None, xlabels=None, log=False) -> list:
 
     results = []
     
@@ -68,14 +68,18 @@ def plotVariableIndependent(ax, data: list, title: str, variable_name: str, nbin
         ax.set_xticks(xticks)
         ax.set_xticklabels(xlabels)
     
-    ax.set_ylabel("Entries [Arbitrary]", loc="top")
+    if log:
+        ax.set_yscale("log")
+        ax.set_ylabel("Log Entries [Arbitrary]", loc="top")
+    else:
+        ax.set_ylabel("Entries [Arbitrary]", loc="top")
     ax.set_title(title)
     ax.legend()
 
     return [results[y][0] for y in range(len(results))], results[0][1]
 
 def plotVariableStacked(ax, data: list, title: str, variable_name: str, nbins: int, colors: list, labels: list,
-                             x_max=-99, x_min=-99, xticks=None, xlabels=None) -> list:
+                             x_max=-99, x_min=-99, xticks=None, xlabels=None, log=False) -> list:
 
     if x_max == -99:
         x_max = max([max(x) for x in data])
@@ -92,10 +96,20 @@ def plotVariableStacked(ax, data: list, title: str, variable_name: str, nbins: i
     if xticks:
         ax.set_xticks(xticks)
         ax.set_xticklabels(xlabels)
-    
-    ax.set_ylabel("Entries [Arbitrary]", loc="top")
+    if log:
+        ax.set_yscale("log")
+        ax.set_ylabel("Log Entries [Arbitrary]", loc="top")
+    else:
+        ax.set_ylabel("Entries [Arbitrary]", loc="top")
     ax.set_title(title)
     ax.legend()
+
+    for i in range(len(results[0])):
+        if i == 0:
+            continue
+        else:
+            for j in range(i):
+                results[0][i] -= results[0][j]
 
     return results
 
@@ -127,12 +141,13 @@ def plotResiduals(ax, data: list, bins: list, labels: list, colors: list, xticks
         ax.set_xticklabels(xlabels)
     
     ax.set_ylabel("Fraction", loc="top")
+    ax.set_ylim(-0.05, 1.05)
 
     return
         
         
-def plotDistributions(input: str, title: str, output:str, func) -> None:
-    df = pd.read_pickle(input)
+def plotDistributions(df, title: str, output:str, func) -> None:
+
     nentries = len(df.index)
 
     light = df[(df["flavour"]==0)]
@@ -143,10 +158,13 @@ def plotDistributions(input: str, title: str, output:str, func) -> None:
     labels = ["light", r"$\it{c}$", r"$\it{b}$"]
 
     figure, ax = plt.subplots(4, 2, figsize=(12, 12), gridspec_kw={"height_ratios": [4, 1, 4 ,1], "width_ratios": [2, 3]})
+    title += ". STACKED." if func==plotVariableStacked else ". INDIVIDUAL."
+    title += f" NUMBER OF JETS: {nentries}."
     figure.suptitle(title, weight='bold')
 
     # PLOT FLAVOUR DISTRIBUTION
     plotFlavourDistribution(ax=ax[0,0], data=fl, nentries=nentries, colors=colors, labels=labels)
+    ax[1,0].axis("off")
 
     # PLOT SVMASS DISTRIBUTION
     sv = []
@@ -154,7 +172,7 @@ def plotDistributions(input: str, title: str, output:str, func) -> None:
         sv.append([x[0] for x in frame["SVmass"].to_numpy()])
 
     hist = func(ax=ax[0,1], data=sv, title="Secondary Vertex Mass Distribution", variable_name=r"SV Mass [MeV/$\it{c}$]",
-                             nbins=30, colors=colors, labels=labels, x_min=0.01)
+                             nbins=30, colors=colors, labels=labels, log=True)
     plotResiduals(ax=ax[1,1], data=hist[0], bins=hist[1], labels=labels, colors=colors)
 
     # PLOT PT DISTRIBUTION
@@ -183,6 +201,13 @@ def plotDistributions(input: str, title: str, output:str, func) -> None:
     
     return
 
+def plotFile(input: str, title: str, output: str) -> None:
+
+    df = pd.read_pickle(input)
+    plotDistributions(df, title, output+"_independent.png", plotVariableIndependent)
+    plotDistributions(df, title, output+"_stacked.png", plotVariableStacked)
+
+    return
 
 def producePlots(path: str, dataset_name: str, suffix: str):
     datasets_1 = ["B-ENHANCED", "C/L-ENHANCED"]
@@ -197,8 +222,7 @@ def producePlots(path: str, dataset_name: str, suffix: str):
             paths.append(path+"/"+datasets_2[i]+"_"+methods[j].lower()+"_"+suffix)
     for i in range(len(titles)):
         print("Iterating...")
-        plotDistributions(paths[i]+".pkl", titles[i], paths[i]+"_independent.png", plotVariableIndependent)
-        plotDistributions(paths[i]+".pkl", titles[i], paths[i]+"_stacked.png", plotVariableStacked)
+        plotFile(paths[i]+".pkl", titles[i], paths[i])
         print("Plotted!")
 
 if __name__ == "__main__":

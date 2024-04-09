@@ -32,33 +32,22 @@ import numpy as np
 import awkward as ak
 from tqdm import tqdm
 
+import plot
+import configuration
+
 def Argparser():
     parser = argparse.ArgumentParser(description="Assess calibration methods")
 
-    parser.add_argument('--read_root', required=False, help="Set data to be read from root files")
-    parser.add_argument('--read_pkl', required=False, help="Set data to be read from pickle files")
+    parser.add_argument('-c', '--config', type=str, required=True, help="Set path to the configuration file")
 
-    parser.add_argument('--root_even', type=str, required='--read_root' in sys.argv, help="Path to the root file containing the even data")
-    parser.add_argument('--root_odd', type=str, required='--read_root' in sys.argv, help="Path to the root file containing the odd data")
-    parser.add_argument('--pkl_even', type=str, required='--read_root' in sys.argv, help="Path to the pickle file containing the even data")
-    parser.add_argument('--pkl_odd', type=str, required='--read_root' in sys.argv, help="Path to the pickle file containing the odd data")
-    parser.add_argument('--tree_even', type=str, required=False, default='matched_even', help="Name of the tree containing the even data")
-    parser.add_argument('--tree_odd', type=str, required=False, default='matched_odd', help="Name of the tree containing the odd data")
-
-    parser.add_argument('--benh_A', type=str, required=(('--read_pkl' in sys.argv) or ('--store_pickles' in sys.argv)), help="Path to the pickle file containing b enhanced sample using method A")
-    parser.add_argument('--benh_B', type=str, required=(('--read_pkl' in sys.argv) or ('--store_pickles' in sys.argv)), help="Path to the pickle file containing b enhanced sample using method B")
-    parser.add_argument('--clenh_A', type=str, required=(('--read_pkl' in sys.argv) or ('--store_pickles' in sys.argv)), help="Path to the pickle file containing c & l enhanced sample using method A")
-    parser.add_argument('--clenh_B', type=str, required=(('--read_pkl' in sys.argv) or ('--store_pickles' in sys.argv)), help="Path to the pickle file containing c & l enhanced sample using method B")
-    
-    parser.add_argument('--store_pickles', required=False, help="Set classified data to be stored")
     return parser.parse_args()
 
-def ReadInData(args):
-    even_data = uproot.open(args.root_even)[args.tree_even]
-    odd_data = uproot.open(args.root_odd)[args.tree_odd]
+def ReadInData(settings):
+    even_data = uproot.open(settings.root_even)[settings.tree_even]
+    odd_data = uproot.open(settings.root_odd)[settings.tree_odd]
 
-    even_reco = pd.read_pickle(args.pkl_even)
-    odd_reco = pd.read_pickle(args.pkl_odd)
+    even_reco = pd.read_pickle(settings.pkl_even)
+    odd_reco = pd.read_pickle(settings.pkl_odd)
 
     return [even_data, odd_data], [even_reco, odd_reco]
 
@@ -162,43 +151,71 @@ def ClassifyEvents(root: list, reco: list):
 
     return [b_enhanced_A, b_enhanced_B], [cl_enhanced_A, cl_enhanced_B]
 
-def GetFromPickle(args):
+def GetFromPickle(settings) -> list:
 
-    b_enhanced_A = pd.read_pickle(args.benh_A)
-    b_enhanced_B = pd.read_pickle(args.benh_B)
-    cl_enhanced_A = pd.read_pickle(args.clenh_A)
-    cl_enhanced_B = pd.read_pickle(args.clenh_B)
+    b_enhanced_A = pd.read_pickle(settings.benhA_pkl)
+    b_enhanced_B = pd.read_pickle(settings.benhB_pkl)
+    cl_enhanced_A = pd.read_pickle(settings.clenhA_pkl)
+    cl_enhanced_B = pd.read_pickle(settings.clenhB_pkl)
 
     return [b_enhanced_A, b_enhanced_B], [cl_enhanced_A, cl_enhanced_B]
+
+def SavePlots(b_enhanced, cl_enhanced, settings) -> None:
+
+    for index, element in enumerate(['A', 'B']):
+        title = "B-ENHANCED. METHOD " + element + ". " + settings.plot_extra_info
+        path = settings.plots_path + "/benhanced_" + element.lower()
+        path = path + "_" + settings.extra_info.lower() if settings.plot_extra_info!=None else path
+        plot.plotDistributions(b_enhanced[index], title, path+"_stacked.png", plot.plotVariableStacked)
+        plot.plotDistributions(b_enhanced[index], title, path+"_independent.png", plot.plotVariableIndependent)
+
+    for index, element in enumerate(['A', 'B']):
+        title = "C/L-ENHANCED. METHOD " + element + ". " + settings.plot_extra_info
+        path = settinfs.plots_path + "/clenhanced_" + element.lower()
+        path = path + "_" + settings.extra_info.lower() if settings.plot_extra_info!=None else path
+        plot.plotDistributions(cl_enhanced[index], title, path+"_stacked.png", plot.plotVariableStacked)
+        plot.plotDistributions(cl_enhanced[index], title, path+"_independent.png", plot.plotVariableIndependent)
+
+    return
 
 def RecoDistributions():
 
     args = Argparser()
 
-    # READ IN DATA
-    if args.read_pkl:
-        b_enhanced, cl_enhanced = GetFromPickle(args=args)
+    f = open(args.config,)
+    settings = configuration.settings()
+    settings.update_settings(f)
 
-    elif args.read_root:
-        root_file, reco_info = ReadInData(args=args)
+    print("CHECKPOINT: Successfully loaded the settings!")
+
+    # READ IN DATA
+    if settings.read_pickle:
+        b_enhanced, cl_enhanced = GetFromPickle(settings=settings)
+
+    elif settings.read_root:
+        root_file, reco_info = ReadInData(settings=settings)
 
         # ORDER DATA IN PANDAS DATAFRAMES
         b_enhanced, cl_enhanced = ClassifyEvents(root=root_file, reco=reco_info)
 
     else:
-        print("Either the flag '--read_pkl' or '--read_root' are required")
-        print("Please specify the desired option when calling the script")
-        return 1
+        print("ERROR: The given configuration was not correct")
+        print("ERROR: Exiting the program")
+
+    print("CHECKPOINT: Succesfully loaded the data")
 
     # STORE DATA IF REQUESTED
-    if args.store_pickles:
-        b_enhanced[0].to_pickle(args.benh_A)
-        b_enhanced[1].to_pickle(args.benh_B)
-        cl_enhanced[0].to_pickle(args.clenh_A)
-        cl_enhanced[1].to_pickle(args.clenh_B)
+    if settings.store_pickles:
+        b_enhanced[0].to_pickle(settings.benhA_pkl)
+        b_enhanced[1].to_pickle(settings.benhB_pkl)
+        cl_enhanced[0].to_pickle(settings.clenhA_pkl)
+        cl_enhanced[1].to_pickle(settings.clenhB_pkl)
+        print("CHECKPOINT: Successfully written the pickles")
 
     # PRODUCE PLOTS
-
+    if args.plots_path:
+        SavePlots(b_enhanced=b_enhanced, cl_enhanced=cl_enhanced, settings=settings)
+        print("CHECKPOINT: Succesfully created the figures")
     return 0
 
 if __name__ == "__main__":
