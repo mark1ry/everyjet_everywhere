@@ -56,101 +56,150 @@ def CreateHistograms() -> dict:
     sv_nbins = 24
     sv_xmin = 0
     sv_xmax = 6000
+    pt_nbins = 56
+    pt_xmin = 20000
+    pt_xmax = 300000
 
-    
     return {
         # SV Mass for B-enhanced
-        "jet_topLep_SV_mass_Electron_basic_final_B": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B", "jet_topLep_SV_mass_Electron_basic_final_B", 25, 0, 6000),
-        "jet_topLep_SV_mass_Electron_basic_final_B_passWP77": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_passWP77", "jet_topLep_SV_mass_Electron_basic_final_B_passWP77", 25, 0, 6000),
-        "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_b": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_passWP77_b", "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_b", 25, 0, 6000),
-        "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c", "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c", 25, 0, 6000),
-        "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l", "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l", 25, 0, 6000),
-        "jet_topLep_SV_mass_Electron_basic_final_B_failWP77": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77", 25, 0, 6000),
-        "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b", 25, 0, 6000),
-        "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c", 25, 0, 6000),
-        "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l", 25, 0, 6000),
+        "jet_topLep_SV_mass_Electron_basic_final_B": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B", "jet_topLep_SV_mass_Electron_basic_final_B", sv_nbins, sv_xmin, sv_xmax),
+        "jet_topLep_SV_mass_Electron_basic_final_B_passWP77": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_passWP77", "jet_topLep_SV_mass_Electron_basic_final_B_passWP77", sv_nbins, sv_xmin, sv_xmax),
+        "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_b": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_passWP77_b", "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_b", sv_nbins, sv_xmin, sv_xmax),
+        "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c", "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c", sv_nbins, sv_xmin, sv_xmax),
+        "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l", "jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l", sv_nbins, sv_xmin, sv_xmax),
+        "jet_topLep_SV_mass_Electron_basic_final_B_failWP77": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77", sv_nbins, sv_xmin, sv_xmax),
+        "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b", sv_nbins, sv_xmin, sv_xmax),
+        "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c", sv_nbins, sv_xmin, sv_xmax),
+        "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l", sv_nbins, sv_xmin, sv_xmax),
         # pT for B-enhanced
-        "jet_topLep_pt_Electron_basic_final_B": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B", "jet_topLep_pt_Electron_basic_final_B", 56, 20000, 300000),
-        "jet_topLep_pt_Electron_basic_final_B_passWP77": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_passWP77", "jet_topLep_pt_Electron_basic_final_B_passWP77", 56, 20000, 300000),
-        "jet_topLep_pt_Electron_basic_final_B_passWP77_b": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_passWP77_b", "jet_topLep_pt_Electron_basic_final_B_passWP77_b", 56, 20000, 300000),
-        "jet_topLep_pt_Electron_basic_final_B_passWP77_c": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_passWP77_c", "jet_topLep_pt_Electron_basic_final_B_passWP77_c", 56, 20000, 300000),
-        "jet_topLep_pt_Electron_basic_final_B_passWP77_l": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_passWP77_l", "jet_topLep_pt_Electron_basic_final_B_passWP77_l", 56, 20000, 300000),
-        "jet_topLep_pt_Electron_basic_final_B_failWP77": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_failWP77", "jet_topLep_pt_Electron_basic_final_B_failWP77", 56, 20000, 300000),
-        "jet_topLep_pt_Electron_basic_final_B_failWP77_b": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_failWP77_b", "jet_topLep_pt_Electron_basic_final_B_failWP77_b", 56, 20000, 300000),
-        "jet_topLep_pt_Electron_basic_final_B_failWP77_c": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_failWP77_c", "jet_topLep_pt_Electron_basic_final_B_failWP77_c", 56, 20000, 300000),
-        "jet_topLep_pt_Electron_basic_final_B_failWP77_l": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_failWP77_l", "jet_topLep_pt_Electron_basic_final_B_failWP77_l", 56, 20000, 300000),
+        "jet_topLep_pt_Electron_basic_final_B": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B", "jet_topLep_pt_Electron_basic_final_B", pt_nbins, pt_xmin, pt_xmax),
+        "jet_topLep_pt_Electron_basic_final_B_passWP77": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_passWP77", "jet_topLep_pt_Electron_basic_final_B_passWP77", pt_nbins, pt_xmin, pt_xmax),
+        "jet_topLep_pt_Electron_basic_final_B_passWP77_b": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_passWP77_b", "jet_topLep_pt_Electron_basic_final_B_passWP77_b", pt_nbins, pt_xmin, pt_xmax),
+        "jet_topLep_pt_Electron_basic_final_B_passWP77_c": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_passWP77_c", "jet_topLep_pt_Electron_basic_final_B_passWP77_c", pt_nbins, pt_xmin, pt_xmax),
+        "jet_topLep_pt_Electron_basic_final_B_passWP77_l": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_passWP77_l", "jet_topLep_pt_Electron_basic_final_B_passWP77_l", pt_nbins, pt_xmin, pt_xmax),
+        "jet_topLep_pt_Electron_basic_final_B_failWP77": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_failWP77", "jet_topLep_pt_Electron_basic_final_B_failWP77", pt_nbins, pt_xmin, pt_xmax),
+        "jet_topLep_pt_Electron_basic_final_B_failWP77_b": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_failWP77_b", "jet_topLep_pt_Electron_basic_final_B_failWP77_b", pt_nbins, pt_xmin, pt_xmax),
+        "jet_topLep_pt_Electron_basic_final_B_failWP77_c": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_failWP77_c", "jet_topLep_pt_Electron_basic_final_B_failWP77_c", pt_nbins, pt_xmin, pt_xmax),
+        "jet_topLep_pt_Electron_basic_final_B_failWP77_l": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_failWP77_l", "jet_topLep_pt_Electron_basic_final_B_failWP77_l", pt_nbins, pt_xmin, pt_xmax),
         # SV Mass for C/L-enhanced
-        "average_SV_mass_Wjets_Muon_basic_final_B": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B", "average_SV_mass_Wjets_Muon_basic_final_B", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx", 25, 0, 6000),
-        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx", 25, 0, 6000),
+        "average_SV_mass_Wjets_Muon_basic_final_B": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B", "average_SV_mass_Wjets_Muon_basic_final_B", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb", "average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb", "average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx", sv_nbins, sv_xmin, sv_xmax),
+        "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx", sv_nbins, sv_xmin, sv_xmax),
         # pT for C/L-enhanced
-        "jet_W1_pt_Muon_basic_final_B": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B", "jet_W1_pt_Muon_basic_final_B", 56, 20000, 300000),
-        "jet_W1_pt_Muon_basic_final_B_passWP77": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_passWP77", "jet_W1_pt_Muon_basic_final_B_passWP77", 56, 20000, 300000),
-        "jet_W1_pt_Muon_basic_final_B_passWP77_b": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_passWP77_b", "jet_W1_pt_Muon_basic_final_B_passWP77_b", 56, 20000, 300000),
-        "jet_W1_pt_Muon_basic_final_B_passWP77_c": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_passWP77_c", "jet_W1_pt_Muon_basic_final_B_passWP77_c", 56, 20000, 300000),
-        "jet_W1_pt_Muon_basic_final_B_passWP77_l": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_passWP77_l", "jet_W1_pt_Muon_basic_final_B_passWP77_l", 56, 20000, 300000),
-        "jet_W1_pt_Muon_basic_final_B_failWP77": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_failWP77", "jet_W1_pt_Muon_basic_final_B_failWP77", 56, 20000, 300000),
-        "jet_W1_pt_Muon_basic_final_B_failWP77_b": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_failWP77_b", "jet_W1_pt_Muon_basic_final_B_failWP77_b", 56, 20000, 300000),
-        "jet_W1_pt_Muon_basic_final_B_failWP77_c": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_failWP77_c", "jet_W1_pt_Muon_basic_final_B_failWP77_c", 56, 20000, 300000),
-        "jet_W1_pt_Muon_basic_final_B_failWP77_l": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_failWP77_l", "jet_W1_pt_Muon_basic_final_B_failWP77_l", 56, 20000, 300000),
-        "jet_W2_pt_Muon_basic_final_B": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B", "jet_W2_pt_Muon_basic_final_B", 56, 20000, 300000),
-        "jet_W2_pt_Muon_basic_final_B_passWP77": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_passWP77", "jet_W2_pt_Muon_basic_final_B_passWP77", 56, 20000, 300000),
-        "jet_W2_pt_Muon_basic_final_B_passWP77_b": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_passWP77_b", "jet_W2_pt_Muon_basic_final_B_passWP77_b", 56, 20000, 300000),
-        "jet_W2_pt_Muon_basic_final_B_passWP77_c": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_passWP77_c", "jet_W2_pt_Muon_basic_final_B_passWP77_c", 56, 20000, 300000),
-        "jet_W2_pt_Muon_basic_final_B_passWP77_l": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_passWP77_l", "jet_W2_pt_Muon_basic_final_B_passWP77_l", 56, 20000, 300000),
-        "jet_W2_pt_Muon_basic_final_B_failWP77": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_failWP77", "jet_W2_pt_Muon_basic_final_B_failWP77", 56, 20000, 300000),
-        "jet_W2_pt_Muon_basic_final_B_failWP77_b": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_failWP77_b", "jet_W2_pt_Muon_basic_final_B_failWP77_b", 56, 20000, 300000),
-        "jet_W2_pt_Muon_basic_final_B_failWP77_c": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_failWP77_c", "jet_W2_pt_Muon_basic_final_B_failWP77_c", 56, 20000, 300000),
-        "jet_W2_pt_Muon_basic_final_B_failWP77_l": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_failWP77_l", "jet_W2_pt_Muon_basic_final_B_failWP77_l", 56, 20000, 300000)
+        "jet_W1_pt_Muon_basic_final_B": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B", "jet_W1_pt_Muon_basic_final_B", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W1_pt_Muon_basic_final_B_passWP77": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_passWP77", "jet_W1_pt_Muon_basic_final_B_passWP77", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W1_pt_Muon_basic_final_B_passWP77_b": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_passWP77_b", "jet_W1_pt_Muon_basic_final_B_passWP77_b", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W1_pt_Muon_basic_final_B_passWP77_c": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_passWP77_c", "jet_W1_pt_Muon_basic_final_B_passWP77_c", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W1_pt_Muon_basic_final_B_passWP77_l": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_passWP77_l", "jet_W1_pt_Muon_basic_final_B_passWP77_l", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W1_pt_Muon_basic_final_B_failWP77": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_failWP77", "jet_W1_pt_Muon_basic_final_B_failWP77", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W1_pt_Muon_basic_final_B_failWP77_b": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_failWP77_b", "jet_W1_pt_Muon_basic_final_B_failWP77_b", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W1_pt_Muon_basic_final_B_failWP77_c": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_failWP77_c", "jet_W1_pt_Muon_basic_final_B_failWP77_c", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W1_pt_Muon_basic_final_B_failWP77_l": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_failWP77_l", "jet_W1_pt_Muon_basic_final_B_failWP77_l", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W2_pt_Muon_basic_final_B": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B", "jet_W2_pt_Muon_basic_final_B", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W2_pt_Muon_basic_final_B_passWP77": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_passWP77", "jet_W2_pt_Muon_basic_final_B_passWP77", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W2_pt_Muon_basic_final_B_passWP77_b": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_passWP77_b", "jet_W2_pt_Muon_basic_final_B_passWP77_b", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W2_pt_Muon_basic_final_B_passWP77_c": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_passWP77_c", "jet_W2_pt_Muon_basic_final_B_passWP77_c", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W2_pt_Muon_basic_final_B_passWP77_l": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_passWP77_l", "jet_W2_pt_Muon_basic_final_B_passWP77_l", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W2_pt_Muon_basic_final_B_failWP77": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_failWP77", "jet_W2_pt_Muon_basic_final_B_failWP77", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W2_pt_Muon_basic_final_B_failWP77_b": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_failWP77_b", "jet_W2_pt_Muon_basic_final_B_failWP77_b", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W2_pt_Muon_basic_final_B_failWP77_c": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_failWP77_c", "jet_W2_pt_Muon_basic_final_B_failWP77_c", pt_nbins, pt_xmin, pt_xmax),
+        "jet_W2_pt_Muon_basic_final_B_failWP77_l": ROOT.TH1D("jet_W2_pt_Muon_basic_final_B_failWP77_l", "jet_W2_pt_Muon_basic_final_B_failWP77_l", pt_nbins, pt_xmin, pt_xmax)
     }
 
 
-
-def SelectBenhanced(event, reco: pd.DataFrame, index: int):
+def SelectBenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) -> dict:
 
     bhad_index = reco["bhad_index"]
     blep_index = reco["blep_index"]
 
     if event["jet_isbtagged_DL1dv01_60"][bhad_index]:
 
-def SelectCLenhanced(event, reco: pd.DataFrame, index: int):
+        # Fill the histogram with the total SV mass before splitting (we want hist_total=hist_total_check)
+        histograms["jet_topLep_SV_mass_Electron_basic_final_B"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+        histograms["jet_topLep_pt_Electron_basic_final_B"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+        
+        #Need to split the data into 2 when they pass/fail the blep tag 77% WP
+        if event["jet_DL1dv01"][blep_index] > 2.456:
+
+            # Fill the histogram with events that are tagged
+            histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+            histograms["jet_topLep_pt_Electron_basic_final_B_passWP77"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+
+            # Split according to truth flavour and fill histograms
+            match event["jet_truthflav"][blep_index]:
+                case 5:
+                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_b"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+                    histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_b"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+
+                case 4:
+                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+                    histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_c"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+
+                case 0:
+                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+                    histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_l"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+
+        else:
+
+            # Fill the histogram with all the events not b-tagged
+            histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+            histograms["jet_topLep_pt_Electron_basic_final_B_failWP77"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+
+            # Split events accotding to their truth flavour and fill histograms
+            match event["jet_truthflav"][blep_index]:
+                case 5:
+                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+                    histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_b"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+
+                case 4:
+                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+                    histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_c"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+
+                case 0:
+                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+                    histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_l"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+            
+    return histograms
+
+
+def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) -> dict:
 
     bhad_index = reco["bhad_index"]
     blep_index = reco["blep_index"]
@@ -159,7 +208,166 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int):
 
     if event["jet_DL1dv01"][bhad_index]>2.456 and event["jet_DL1dv01"][blep_index]>2.456:
 
-def ClassifyEvents(root: list, reco: list):
+        # Fill histograms before splitting
+        histograms["average_SV_mass_Wjets_Muon_basic_final_B"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+        histograms["jet_W1_pt_Muon_basic_final_B"].Fill((event["jet_pt"][q1_index]), event["weight_mc"])
+        histograms["jet_W2_pt_Muon_basic_final_B"].Fill((event["jet_pt"][q2_index]), event["weight_mc"])
+
+        q1_and_q2 = (event["jet_truthflav"][q1_index], event["jet_truthflav"][q2_index])
+
+        # Split the data into 2-btags, 1 b-tag and 0 b-tags (targets now are the q1 and q2)
+        # 2 B-TAGS
+        if event["jet_DL1dv01"][q1_index]>2.456 and event["jet_DL1dv01"][q2_index]>2.456:
+            # Fill the histogram with 2 b-tags
+            histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])        
+            # Split flavour permutations
+            match q1_and_q2:
+                case (5,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (5,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (5,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (4,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (4,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (4,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (0,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (0,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (0,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+
+        # 1 B-TAG
+        elif event["jet_DL1dv01"][q1_index]>2.456 or event["jet_DL1dv01"][q2_index]>2.456:
+            # Fill the histogram with 1 b-tag
+            histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+            # Divide the events by whether the first is b-tagged or the second is
+            if event["jet_DL1dv01"][q1_index]>2.456:
+                # Split flavour permutations
+                match q1_and_q2:
+                    case (5,5):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (5,4):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (5,0):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (4,5):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (4,4):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (4,0):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (0,5):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (0,4):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (0,0):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                
+            elif event["jet_DL1dv01"][q2_index]>2.456:
+                # Split flavour permutations
+                match q1_and_q2:
+                    case (5,5):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (5,4):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (5,0):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (4,5):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (4,4):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (4,0):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (0,5):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (0,4):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                    case (0,0):
+                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+
+        # 0 B-TAGS
+        else:
+            # Fill the histogram with 0 b-tags
+            histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+            # Split flavour permutations
+            match q1_and_q2:
+                case (5,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (5,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (5,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (4,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (4,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (4,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (0,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (0,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                case (0,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+
+
+        # FILL PT PLOTS FOR Q1 AND Q2 INDEPENDENTLY
+        # Q1
+        if event["jet_DL1dv01"][q1_index] > 2.456:
+            # Fill the histogram with tagged jets
+            histograms["jet_W1_pt_Muon_basic_final_B_passWP77"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+            # Split by flavour
+            match event["jet_truthflav"][q1_index]:
+                case 5:
+                    histograms["jet_W1_pt_Muon_basic_final_B_passWP77_b"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+                case 4:
+                    histograms["jet_W1_pt_Muon_basic_final_B_passWP77_c"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+                case 0:
+                    histograms["jet_W1_pt_Muon_basic_final_B_passWP77_l"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+        else:
+            # Fill histogam with non-tagged jets
+            histograms["jet_W1_pt_Muon_basic_final_B_failWP77"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+            # Split by flavour
+            match event["jet_truthflav"][q1_index]:
+                case 5:
+                    histograms["jet_W1_pt_Muon_basic_final_B_failWP77_b"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+                case 4:
+                    histograms["jet_W1_pt_Muon_basic_final_B_failWP77_c"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+                case 0:
+                    histograms["jet_W1_pt_Muon_basic_final_B_failWP77_l"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+
+        # Q2
+        if event["jet_DL1dv01"][q2_index] > 2.456:
+            # Fill the histogram with tagged jets
+            histograms["jet_W2_pt_Muon_basic_final_B_passWP77"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+            # match statement starts here .
+            match event["jet_truthflav"][q2_index]:
+                case 5:
+                    histograms["jet_W2_pt_Muon_basic_final_B_passWP77_b"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+                case 4:
+                    histograms["jet_W2_pt_Muon_basic_final_B_passWP77_c"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+                case 0:
+                    histograms["jet_W2_pt_Muon_basic_final_B_passWP77_l"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+        else:
+            # Fill the histogram with non-tagged jets
+            histograms["jet_W2_pt_Muon_basic_final_B_failWP77"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+            # match statement starts here .
+            match event["jet_truthflav"][q2_index]:
+                case 5:
+                    histograms["jet_W2_pt_Muon_basic_final_B_failWP77_b"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+                case 4:
+                    histograms["jet_W2_pt_Muon_basic_final_B_failWP77_c"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+                case 0:
+                    histograms["jet_W2_pt_Muon_basic_final_B_failWP77_l"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+    return histograms
+
+
+def ClassifyEvents(root: list, reco: list, histograms: dict) -> dict:
     # CREATE LISTS TO HOLD RELEVANT INFO
     b_enhanced = []
     cl_enhanced = []
@@ -174,10 +382,11 @@ def ClassifyEvents(root: list, reco: list):
         for event_index in tqdm(range(nentries), desc='Classifying events', unit='event'):
             event = data[event_index]
             if len(event["el_pt"])==1:
-                SelectBenhancedMethodB(event, df.loc[[event_index]], event_index)
+                histograms = SelectBenhanced(event, df.loc[[event_index]], event_index, histograms)
 
             if len(event["mu_pt"])==1:
-                SelectCLenhancedMethodB(event, df.loc[[event_index]], event_index)
+                histograms = SelectCLenhanced(event, df.loc[[event_index]], event_index, histograms)
+    return histograms
 
 
 def RecoDistributions():
@@ -194,12 +403,14 @@ def RecoDistributions():
 
     # OPEN INPUT FILES
     root_file, reco_info = ReadInData(settings=settings)
+    print("CHECKPOINT: Successfully loaded the data!")
 
     # CREATE DICT CONTAINING HISTOGRAMS
     histograms = CreateHistograms()
 
     # ORDER DATA IN PANDAS DATAFRAMES
-    b_enhanced, cl_enhanced = ClassifyEvents(root=root_file, reco=reco_info)
+    histograms = ClassifyEvents(root=root_file, reco=reco_info, histograms=histograms)
+    print("CHECKPOINT: The histograms have been filled!")
 
     # OPEN OUTPUT FILE AND WRITE THE HISTOGRAMS
     output_file = ROOT.TFile.Open(settings.output_file_path, 'RECREATE')
@@ -207,6 +418,9 @@ def RecoDistributions():
     for key, value in histograms.items():
         output_file.Write(value)
     output_file.Close()
+    print("CHECKPOINT: The root file has been written out!")
+
+    return
 
 
 if __name__ == "__main__":
