@@ -183,7 +183,7 @@ def RecoDistributions():
     args = Argparser()
 
     f = open(args.config,)
-    settings = configuration.settings()
+    settings = configuration.settings_check()
     settings.update_settings(f)
 
     print("CHECKPOINT: Successfully loaded the settings!")

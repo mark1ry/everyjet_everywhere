@@ -1,6 +1,6 @@
 import json
 
-class settings:
+class settings_check:
     def __init__(self):
         self.read_root: bool = False
         self.read_pickle: bool = False
@@ -50,3 +50,33 @@ class settings:
 
         return True
 
+class settings_split:
+    def __init__(self):
+        self.even_root_path: str = ""
+        self.odd_root_path: str = ""
+        self.even_pkl_path: str = ""
+        self.odd_pkl_path: str = ""
+        self.even_tree_name: str = ""
+        self.odd_tree_name: str = ""
+        self.output_root_path: str = ""
+
+    def update_settings(self, path):
+        config = json.load(path)
+        for key, value in config.items():
+            if key in self.__dict__:
+                setattr(self, key, type(self.__dict__[key])(value))
+            else:
+                print(f"WARNING: The key {key} was not expected in the settings. It will be ignored")
+
+        if not self.check_validity():
+            self.reset_settings()
+            print("WARNING: The settings given were incompatible. Please check that all the required variables have been properly given")
+
+    def reset_settings(self):
+        self.__init__()
+
+    def check_validity(self):
+        if self.even_root_path=="" or self.even_pkl_path=="" or self.even_tree_name=="" or self.odd_pkl_path=="" or self.odd_root_path=="" or self.odd_tree_name=="" or self.output_root_path=="": # Data should be read from either the pickle or root
+            return False
+
+        return True
