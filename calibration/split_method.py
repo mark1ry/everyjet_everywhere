@@ -70,7 +70,10 @@ def CreateHistograms() -> dict:
         "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b", sv_nbins, sv_xmin, sv_xmax),
         "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c", sv_nbins, sv_xmin, sv_xmax),
         "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l", sv_nbins, sv_xmin, sv_xmax),
-        "sum_jet_topLep_SV_mass_Electron_basic_final_B": ROOT.TH1D("sum_jet_
+        "sum_jet_topLep_SV_mass_Electron_basic_final_B": ROOT.TH1D("sum_jet_topLep_SV_mass_Electron_basic_final_B", "sum_jet_topLep_SV_mass_Electron_basic_final_B", sv_nbins, sv_xmin, sv_xmax),
+        "sum_jet_topLep_SV_mass_Electron_basic_final_B_passWP77": ROOT.TH1D("sum_jet_topLep_SV_mass_Electron_basic_final_B_passWP77", "sum_jet_topLep_SV_mass_Electron_basic_final_B_passWP77", sv_nbins, sv_xmin, sv_xmax),
+        "sum_jet_topLep_SV_mass_Electron_basic_final_B_failWP77": ROOT.TH1D("sum_jet_topLep_SV_mass_Electron_basic_final_B_failWP77", "sum_jet_topLep_SV_mass_Electron_basic_final_B_failWP77", sv_nbins, sv_xmin, sv_xmax),
+
         # pT for B-enhanced
         "jet_topLep_pt_Electron_basic_final_B": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B", "jet_topLep_pt_Electron_basic_final_B", pt_nbins, pt_xmin, pt_xmax),
         "jet_topLep_pt_Electron_basic_final_B_passWP77": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_passWP77", "jet_topLep_pt_Electron_basic_final_B_passWP77", pt_nbins, pt_xmin, pt_xmax),
@@ -122,6 +125,10 @@ def CreateHistograms() -> dict:
         "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx", sv_nbins, sv_xmin, sv_xmax),
         "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx", sv_nbins, sv_xmin, sv_xmax),
         "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx": ROOT.TH1D("average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx", "average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx", sv_nbins, sv_xmin, sv_xmax),
+        "sum_average_SV_mass_Wjets_Muon_basic_final_B": ROOT.TH1D("sum_average_SV_mass_Wjets_Muon_basic_final_B", "sum_average_SV_mass_Wjets_Muon_basic_final_B", sv_nbins, sv_xmin, sv_xmax),        
+        "sum_average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77": ROOT.TH1D("sum_average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77", "sum_average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77", sv_nbins, sv_xmin, sv_xmax),
+        "sum_average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77": ROOT.TH1D("sum_average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77", "sum_average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77", sv_nbins, sv_xmin, sv_xmax),
+        "sum_average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77": ROOT.TH1D("sum_average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77", "sum_average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77", sv_nbins, sv_xmin, sv_xmax),
         # pT for C/L-enhanced
         "jet_W1_pt_Muon_basic_final_B": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B", "jet_W1_pt_Muon_basic_final_B", pt_nbins, pt_xmin, pt_xmax),
         "jet_W1_pt_Muon_basic_final_B_passWP77": ROOT.TH1D("jet_W1_pt_Muon_basic_final_B_passWP77", "jet_W1_pt_Muon_basic_final_B_passWP77", pt_nbins, pt_xmin, pt_xmax),
@@ -171,7 +178,7 @@ def SelectBenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) -> 
                 histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
                 histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_c"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
 
-            elif event["jet_truthflav"][blep_index] == 0:
+            else:
                 histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
                 histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_l"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
 
@@ -190,7 +197,7 @@ def SelectBenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) -> 
                 histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
                 histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_c"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
 
-            elif event["jet_truthflav"][blep_index] == 0:
+            else:
                 histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
                 histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_l"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
             
@@ -216,7 +223,8 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) ->
         histograms["jet_W1_pt_Muon_basic_final_B"].Fill((event["jet_pt"][q1_index][0]), event["weight_mc"])
         histograms["jet_W2_pt_Muon_basic_final_B"].Fill((event["jet_pt"][q2_index][0]), event["weight_mc"])
 
-        q1_and_q2 = (event["jet_truthflav"][q1_index], event["jet_truthflav"][q2_index])
+        q1 = event["jet_truthflav"][q1_index]
+        q2 = event["jet_truthflav"][q2_index]
 
         # Split the data into 2-btags, 1 b-tag and 0 b-tags (targets now are the q1 and q2)
         # 2 B-TAGS
@@ -224,23 +232,23 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) ->
             # Fill the histogram with 2 b-tags
             histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])        
             # Split flavour permutations
-            if q1_and_q2 == (5,5):
+            if q1==5 and q2==5:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (5,4):
+            elif q1==5 and q2==4:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (5,0):
+            elif q1==5 and q2 not in [5,4]:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (4,5):
+            elif q1==4 and q2==5:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (4,4):
+            elif q1==4 and q2==4:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (4,0):
+            elif q1==4 and q2 not in [5,4]:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (0,5):
+            elif q1 not in [5,4] and q2==5:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (0,4):
+            elif q1 not in [5,4] and q2==4:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (0,0):
+            else:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
 
         # 1 B-TAG
@@ -250,44 +258,44 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) ->
             # Divide the events by whether the first is b-tagged or the second is
             if event["jet_DL1dv01"][q1_index]>2.456:
                 # Split flavour permutations
-                if q1_and_q2 == (5,5):
+                if q1== 5 and q2==5:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (5,4):
+                elif q1==5 and q2==4:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (5,0):
+                elif q1==5 and q2 not in [5,4]:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (4,5):
+                elif q1==4 and q2==5:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (4,4):
+                elif q1==4 and q2==4:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (4,0):
+                elif q1==4 and q2 not in [5,4]:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (0,5):
+                elif q1 not in [5,4] and q2==5:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (0,4):
+                elif q1 not in [5,4] and q2==4:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (0,0):
+                else:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
                 
             elif event["jet_DL1dv01"][q2_index]>2.456:
                 # Split flavour permutations
-                if q1_and_q2 == (5,5):
+                if q1==5 and q2==5:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (5,4):
+                elif q1==5 and q2==4:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (5,0):
+                elif q1==5 and q2 not in [5,4]:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (4,5):
+                elif q1==4 and q2==5:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (4,4):
+                elif q1==4 and q2==4:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (4,0):
+                elif q1==4 and q2 not in [5,4]:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (0,5):
+                elif q1 not in [5,4] and q2==5:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (0,4):
+                elif q1 not in [5,4] and q2==4:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-                elif q1_and_q2 == (0,0):
+                else:
                     histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
 
         # 0 B-TAGS
@@ -295,23 +303,23 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) ->
             # Fill the histogram with 0 b-tags
             histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
             # Split flavour permutations
-            if q1_and_q2 == (5,5):
+            if q1==5 and q2==5:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (5,4):
+            elif q1==5 and q2==4:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (5,0):
+            elif q1==5 and q2 not in [5,4]:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (4,5):
+            elif q1==4 and q2==5:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (4,4):
+            elif q1==4 and q2==4:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (4,0):
+            elif q1==4 and q2 not in [5,4] :
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (0,5):
+            elif q1 not in [5,4] and q2==5:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (0,4):
+            elif q1 not in [5,4] and q2==4:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
-            elif q1_and_q2 == (0,0):
+            else:
                 histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
 
 
@@ -325,7 +333,7 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) ->
                 histograms["jet_W1_pt_Muon_basic_final_B_passWP77_b"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
             elif event["jet_truthflav"][q1_index] == 4:
                 histograms["jet_W1_pt_Muon_basic_final_B_passWP77_c"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
-            elif event["jet_truthflav"][q1_index] == 0:
+            else:
                 histograms["jet_W1_pt_Muon_basic_final_B_passWP77_l"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
         else:
             # Fill histogam with non-tagged jets
@@ -335,7 +343,7 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) ->
                 histograms["jet_W1_pt_Muon_basic_final_B_failWP77_b"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
             elif event["jet_truthflav"][q1_index] == 4:
                 histograms["jet_W1_pt_Muon_basic_final_B_failWP77_c"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
-            elif event["jet_truthflav"][q1_index] == 0:
+            else:
                 histograms["jet_W1_pt_Muon_basic_final_B_failWP77_l"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
 
         # Q2
@@ -347,7 +355,7 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) ->
                 histograms["jet_W2_pt_Muon_basic_final_B_passWP77_b"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
             elif event["jet_truthflav"][q2_index] == 4:
                 histograms["jet_W2_pt_Muon_basic_final_B_passWP77_c"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
-            elif event["jet_truthflav"][q2_index] == 0:
+            else:
                 histograms["jet_W2_pt_Muon_basic_final_B_passWP77_l"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
         else:
             # Fill the histogram with non-tagged jets
@@ -357,10 +365,60 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) ->
                 histograms["jet_W2_pt_Muon_basic_final_B_failWP77_b"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
             elif event["jet_truthflav"][q2_index] == 4:
                 histograms["jet_W2_pt_Muon_basic_final_B_failWP77_c"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
-            elif event["jet_truthflav"][q2_index] == 0:
+            else:
                 histograms["jet_W2_pt_Muon_basic_final_B_failWP77_l"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
     return histograms
 
+def SumHistograms(histograms: dict) -> dict:
+    # CREATE SUMMED HISTOGRAMS
+    histograms["sum_jet_topLep_SV_mass_Electron_basic_final_B_passWP77"] = histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_b"] \
+                                                                           + histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c"] \
+                                                                           + histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l"]
+    histograms["sum_jet_topLep_SV_mass_Electron_basic_final_B_failWP77"] = histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b"] \
+                                                                           + histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c"] \
+                                                                           + histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l"]
+    histograms["sum_jet_topLep_SV_mass_Electron_basic_final_B"] = histograms["sum_jet_topLep_SV_mass_Electron_basic_final_B_passWP77"] \
+                                                                           + histograms["sum_jet_topLep_SV_mass_Electron_basic_final_B_failWP77"]
+    histograms["sum_average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77"] = histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll"]
+    histograms["sum_average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77"] = histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll"]
+    histograms["sum_average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77"] = histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx"] \
+                                                                           + histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx"]
+    histograms["sum_average_SV_mass_Wjets_Muon_basic_final_B"] = histograms["sum_average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77"] \
+                                                                           + histograms["sum_average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77"] \
+                                                                           + histograms["sum_average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77"]
+    return histograms
 
 def ClassifyEvents(root: list, reco: list, histograms: dict) -> dict:
     # CREATE LISTS TO HOLD RELEVANT INFO
@@ -381,9 +439,9 @@ def ClassifyEvents(root: list, reco: list, histograms: dict) -> dict:
 
             if len(event["mu_pt"])==1:
                 histograms = SelectCLenhanced(event, df.loc[[event_index]], event_index, histograms)
+    CreateHistograms(histograms)
 
     return histograms
-
 
 def RecoDistributions():
 
