@@ -152,51 +152,50 @@ def SelectBenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) -> 
     if event["jet_isbtagged_DL1dv01_60"][bhad_index]:
 
         # Fill the histogram with the total SV mass before splitting (we want hist_total=hist_total_check)
-        histograms["jet_topLep_SV_mass_Electron_basic_final_B"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
-        histograms["jet_topLep_pt_Electron_basic_final_B"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+        histograms["jet_topLep_SV_mass_Electron_basic_final_B"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
+        histograms["jet_topLep_pt_Electron_basic_final_B"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
         
         #Need to split the data into 2 when they pass/fail the blep tag 77% WP
         if event["jet_DL1dv01"][blep_index] > 2.456:
 
             # Fill the histogram with events that are tagged
-            histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
-            histograms["jet_topLep_pt_Electron_basic_final_B_passWP77"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+            histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
+            histograms["jet_topLep_pt_Electron_basic_final_B_passWP77"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
 
             # Split according to truth flavour and fill histograms
-            match event["jet_truthflav"][blep_index]:
-                case 5:
-                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_b"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
-                    histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_b"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+            if event["jet_truthflav"][blep_index] == 5:
+                histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_b"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
+                histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_b"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
 
-                case 4:
-                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
-                    histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_c"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+            elif event["jet_truthflav"][blep_index] == 4:
+                histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_c"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
+                histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_c"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
 
-                case 0:
-                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
-                    histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_l"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+            elif event["jet_truthflav"][blep_index] == 0:
+                histograms["jet_topLep_SV_mass_Electron_basic_final_B_passWP77_l"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
+                histograms["jet_topLep_pt_Electron_basic_final_B_passWP77_l"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
 
         else:
 
             # Fill the histogram with all the events not b-tagged
-            histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
-            histograms["jet_topLep_pt_Electron_basic_final_B_failWP77"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+            histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
+            histograms["jet_topLep_pt_Electron_basic_final_B_failWP77"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
 
             # Split events accotding to their truth flavour and fill histograms
-            match event["jet_truthflav"][blep_index]:
-                case 5:
-                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
-                    histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_b"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+            if event["jet_truthflav"][blep_index] == 5:
+                histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
+                histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_b"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
 
-                case 4:
-                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
-                    histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_c"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+            elif event["jet_truthflav"][blep_index] == 4:
+                histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
+                histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_c"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
 
-                case 0:
-                    histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
-                    histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_l"].Fill(event["jet_pt"][blep_index], event["weight_mc"])
+            elif event["jet_truthflav"][blep_index] == 0:
+                histograms["jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l"].Fill(event["jet_SV_mass"][blep_index][0], event["weight_mc"])
+                histograms["jet_topLep_pt_Electron_basic_final_B_failWP77_l"].Fill(event["jet_pt"][blep_index][0], event["weight_mc"])
             
     return histograms
+    
 
 
 def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) -> dict:
@@ -206,12 +205,16 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) ->
     q1_index = reco["q1_index"]
     q2_index = reco["q2_index"]
 
+    if event["jet_truthflav"][q2_index] != 0:
+        if event["jet_truthflav"][q2_index][0] ==0:
+            print("AAAAA")
+
     if event["jet_DL1dv01"][bhad_index]>2.456 and event["jet_DL1dv01"][blep_index]>2.456:
 
         # Fill histograms before splitting
-        histograms["average_SV_mass_Wjets_Muon_basic_final_B"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-        histograms["jet_W1_pt_Muon_basic_final_B"].Fill((event["jet_pt"][q1_index]), event["weight_mc"])
-        histograms["jet_W2_pt_Muon_basic_final_B"].Fill((event["jet_pt"][q2_index]), event["weight_mc"])
+        histograms["average_SV_mass_Wjets_Muon_basic_final_B"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+        histograms["jet_W1_pt_Muon_basic_final_B"].Fill((event["jet_pt"][q1_index][0]), event["weight_mc"])
+        histograms["jet_W2_pt_Muon_basic_final_B"].Fill((event["jet_pt"][q2_index][0]), event["weight_mc"])
 
         q1_and_q2 = (event["jet_truthflav"][q1_index], event["jet_truthflav"][q2_index])
 
@@ -219,151 +222,143 @@ def SelectCLenhanced(event, reco: pd.DataFrame, index: int, histograms: dict) ->
         # 2 B-TAGS
         if event["jet_DL1dv01"][q1_index]>2.456 and event["jet_DL1dv01"][q2_index]>2.456:
             # Fill the histogram with 2 b-tags
-            histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])        
+            histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])        
             # Split flavour permutations
-            match q1_and_q2:
-                case (5,5):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (5,4):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (5,0):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (4,5):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (4,4):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (4,0):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (0,5):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (0,4):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (0,0):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+            if q1_and_q2 == (5,5):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (5,4):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (5,0):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_bl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (4,5):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (4,4):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (4,0):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_cl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (0,5):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (0,4):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_lc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (0,0):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_2bTWP77_ll"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
 
         # 1 B-TAG
         elif event["jet_DL1dv01"][q1_index]>2.456 or event["jet_DL1dv01"][q2_index]>2.456:
             # Fill the histogram with 1 b-tag
-            histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+            histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
             # Divide the events by whether the first is b-tagged or the second is
             if event["jet_DL1dv01"][q1_index]>2.456:
                 # Split flavour permutations
-                match q1_and_q2:
-                    case (5,5):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (5,4):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (5,0):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (4,5):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (4,4):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (4,0):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (0,5):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (0,4):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (0,0):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                if q1_and_q2 == (5,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (5,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (5,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bxl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (4,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (4,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (4,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cxl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (0,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (0,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (0,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lxl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
                 
             elif event["jet_DL1dv01"][q2_index]>2.456:
                 # Split flavour permutations
-                match q1_and_q2:
-                    case (5,5):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (5,4):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (5,0):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (4,5):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (4,4):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (4,0):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (0,5):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (0,4):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                    case (0,0):
-                        histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+                if q1_and_q2 == (5,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bbx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (5,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_bcx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (5,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_blx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (4,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_cbx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (4,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_ccx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (4,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_clx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (0,5):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lbx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (0,4):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_lcx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+                elif q1_and_q2 == (0,0):
+                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_1bTWP77_llx"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
 
         # 0 B-TAGS
         else:
             # Fill the histogram with 0 b-tags
-            histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77"].Fill(event["jet_SV_mass"][blep_index], event["weight_mc"])
+            histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
             # Split flavour permutations
-            match q1_and_q2:
-                case (5,5):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (5,4):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (5,0):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (4,5):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (4,4):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (4,0):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (0,5):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (0,4):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
-                case (0,0):
-                    histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll"].Fill((event["jet_SV_mass"][q1_index] + event["jet_SV_mass"][q2_index])/2, event["weight_mc"])
+            if q1_and_q2 == (5,5):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (5,4):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (5,0):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_bl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (4,5):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (4,4):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (4,0):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_cl"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (0,5):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lb"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (0,4):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_lc"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
+            elif q1_and_q2 == (0,0):
+                histograms["average_SV_mass_Wjets_Muon_basic_final_B_0bTWP77_ll"].Fill((event["jet_SV_mass"][q1_index][0] + event["jet_SV_mass"][q2_index][0])/2, event["weight_mc"])
 
 
         # FILL PT PLOTS FOR Q1 AND Q2 INDEPENDENTLY
         # Q1
         if event["jet_DL1dv01"][q1_index] > 2.456:
-            # Fill the histogram with tagged jets
-            histograms["jet_W1_pt_Muon_basic_final_B_passWP77"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+            # Fill the histogram w          ith tagged jets
+            histograms["jet_W1_pt_Muon_basic_final_B_passWP77"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
             # Split by flavour
-            match event["jet_truthflav"][q1_index]:
-                case 5:
-                    histograms["jet_W1_pt_Muon_basic_final_B_passWP77_b"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
-                case 4:
-                    histograms["jet_W1_pt_Muon_basic_final_B_passWP77_c"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
-                case 0:
-                    histograms["jet_W1_pt_Muon_basic_final_B_passWP77_l"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+            if event["jet_truthflav"][q1_index] == 5:
+                histograms["jet_W1_pt_Muon_basic_final_B_passWP77_b"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
+            elif event["jet_truthflav"][q1_index] == 4:
+                histograms["jet_W1_pt_Muon_basic_final_B_passWP77_c"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
+            elif event["jet_truthflav"][q1_index] == 0:
+                histograms["jet_W1_pt_Muon_basic_final_B_passWP77_l"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
         else:
             # Fill histogam with non-tagged jets
-            histograms["jet_W1_pt_Muon_basic_final_B_failWP77"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+            histograms["jet_W1_pt_Muon_basic_final_B_failWP77"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
             # Split by flavour
-            match event["jet_truthflav"][q1_index]:
-                case 5:
-                    histograms["jet_W1_pt_Muon_basic_final_B_failWP77_b"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
-                case 4:
-                    histograms["jet_W1_pt_Muon_basic_final_B_failWP77_c"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
-                case 0:
-                    histograms["jet_W1_pt_Muon_basic_final_B_failWP77_l"].Fill(event["jet_pt"][q1_index], event["weight_mc"])
+            if event["jet_truthflav"][q1_index] == 5:
+                histograms["jet_W1_pt_Muon_basic_final_B_failWP77_b"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
+            elif event["jet_truthflav"][q1_index] == 4:
+                histograms["jet_W1_pt_Muon_basic_final_B_failWP77_c"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
+            elif event["jet_truthflav"][q1_index] == 0:
+                histograms["jet_W1_pt_Muon_basic_final_B_failWP77_l"].Fill(event["jet_pt"][q1_index][0], event["weight_mc"])
 
         # Q2
         if event["jet_DL1dv01"][q2_index] > 2.456:
             # Fill the histogram with tagged jets
-            histograms["jet_W2_pt_Muon_basic_final_B_passWP77"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+            histograms["jet_W2_pt_Muon_basic_final_B_passWP77"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
             # match statement starts here .
-            match event["jet_truthflav"][q2_index]:
-                case 5:
-                    histograms["jet_W2_pt_Muon_basic_final_B_passWP77_b"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
-                case 4:
-                    histograms["jet_W2_pt_Muon_basic_final_B_passWP77_c"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
-                case 0:
-                    histograms["jet_W2_pt_Muon_basic_final_B_passWP77_l"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+            if event["jet_truthflav"][q2_index] == 5:
+                histograms["jet_W2_pt_Muon_basic_final_B_passWP77_b"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
+            elif event["jet_truthflav"][q2_index] == 4:
+                histograms["jet_W2_pt_Muon_basic_final_B_passWP77_c"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
+            elif event["jet_truthflav"][q2_index] == 0:
+                histograms["jet_W2_pt_Muon_basic_final_B_passWP77_l"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
         else:
             # Fill the histogram with non-tagged jets
-            histograms["jet_W2_pt_Muon_basic_final_B_failWP77"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+            histograms["jet_W2_pt_Muon_basic_final_B_failWP77"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
             # match statement starts here .
-            match event["jet_truthflav"][q2_index]:
-                case 5:
-                    histograms["jet_W2_pt_Muon_basic_final_B_failWP77_b"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
-                case 4:
-                    histograms["jet_W2_pt_Muon_basic_final_B_failWP77_c"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
-                case 0:
-                    histograms["jet_W2_pt_Muon_basic_final_B_failWP77_l"].Fill(event["jet_pt"][q2_index], event["weight_mc"])
+            if event["jet_truthflav"][q2_index] == 5:
+                histograms["jet_W2_pt_Muon_basic_final_B_failWP77_b"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
+            elif event["jet_truthflav"][q2_index] == 4:
+                histograms["jet_W2_pt_Muon_basic_final_B_failWP77_c"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
+            elif event["jet_truthflav"][q2_index] == 0:
+                histograms["jet_W2_pt_Muon_basic_final_B_failWP77_l"].Fill(event["jet_pt"][q2_index][0], event["weight_mc"])
     return histograms
 
 
@@ -386,6 +381,7 @@ def ClassifyEvents(root: list, reco: list, histograms: dict) -> dict:
 
             if len(event["mu_pt"])==1:
                 histograms = SelectCLenhanced(event, df.loc[[event_index]], event_index, histograms)
+
     return histograms
 
 
@@ -413,10 +409,10 @@ def RecoDistributions():
     print("CHECKPOINT: The histograms have been filled!")
 
     # OPEN OUTPUT FILE AND WRITE THE HISTOGRAMS
-    output_file = ROOT.TFile.Open(settings.output_file_path, 'RECREATE')
+    output_file = ROOT.TFile.Open(settings.output_root_path, 'RECREATE')
     output_file.cd()
     for key, value in histograms.items():
-        output_file.Write(value)
+        value.Write()
     output_file.Close()
     print("CHECKPOINT: The root file has been written out!")
 
