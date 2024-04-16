@@ -1,0 +1,10 @@
+{
+	"even_root_path":   "/eos/user/m/moriolpe/mphys_project/root_files/matched_dl1d_4jets_even.root",
+	"odd_root_path":    "/eos/user/m/moriolpe/mphys_project/root_files/matched_dl1d_4jets_odd.root",
+	"even_pkl_path":    "/eos/user/m/moriolpe/mphys_project/root_files/reco_dl1d_4jets_even.pkl",
+	"odd_pkl_path":     "/eos/user/m/moriolpe/mphys_project/root_files/reco_dl1d_4jets_odd.pkl",
+	"even_tree_name":   "matched_even",
+	"odd_tree_name":    "matched_odd",
+
+    "output_root_path": "/eos/user/m/moriolpe/mphys_project/calibration/result_histograms.root"	
+}

@@ -33,7 +33,6 @@ import numpy as np
 import awkward as ak
 from tqdm import tqdm
 
-import plot
 import configuration
 
 def Argparser():
@@ -71,6 +70,7 @@ def CreateHistograms() -> dict:
         "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_b", sv_nbins, sv_xmin, sv_xmax),
         "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_c", sv_nbins, sv_xmin, sv_xmax),
         "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l": ROOT.TH1D("jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l", "jet_topLep_SV_mass_Electron_basic_final_B_failWP77_l", sv_nbins, sv_xmin, sv_xmax),
+        "sum_jet_topLep_SV_mass_Electron_basic_final_B": ROOT.TH1D("sum_jet_
         # pT for B-enhanced
         "jet_topLep_pt_Electron_basic_final_B": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B", "jet_topLep_pt_Electron_basic_final_B", pt_nbins, pt_xmin, pt_xmax),
         "jet_topLep_pt_Electron_basic_final_B_passWP77": ROOT.TH1D("jet_topLep_pt_Electron_basic_final_B_passWP77", "jet_topLep_pt_Electron_basic_final_B_passWP77", pt_nbins, pt_xmin, pt_xmax),
