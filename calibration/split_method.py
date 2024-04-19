@@ -473,7 +473,8 @@ def RecoDistributions():
     output_file = ROOT.TFile.Open(settings.output_root_path, 'RECREATE')
     output_file.cd()
     for key, value in histograms.items():
-        value.Scale(1./value.Integral(),"width")
+        if value.Integral()!=0:
+            value.Scale(1./value.Integral(),"width")
         value.Write()
     output_file.Close()
     print("CHECKPOINT: The root file has been written out!")
