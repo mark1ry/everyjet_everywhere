@@ -76,7 +76,10 @@ class settings_split:
         self.__init__()
 
     def check_validity(self):
-        if self.even_root_path=="" or self.even_pkl_path=="" or self.even_tree_name=="" or self.odd_pkl_path=="" or self.odd_root_path=="" or self.odd_tree_name=="" or self.output_root_path=="": # Data should be read from either the pickle or root
+        if self.even_root_path=="" or self.even_pkl_path=="" or self.even_tree_name=="" or self.output_root_path=="": # Data should be read from either the pickle or root
             return False
+        elif self.odd_pkl_path=="" or self.odd_root_path=="" or self.odd_tree_name=="":
+            print("WARNING: Only one dataset will be used (Not suitable for even/odd split data)")
+            return True
 
         return True
