@@ -59,8 +59,8 @@ class settings_split:
         self.even_tree_name: str = ""
         self.odd_tree_name: str = ""
         self.output_root_path: str = ""
-        self.n_simulated_events: float = None
-        self.cross_section: float = None
+        self.n_simulated_events: float = 0
+        self.cross_section: float = 0
 
     def update_settings(self, path):
         config = json.load(path)

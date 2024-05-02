@@ -469,7 +469,7 @@ def RecoDistributions():
     histograms = CreateHistograms()
 
     # ORDER DATA IN PANDAS DATAFRAMES
-    histograms = ClassifyEvents(root=root_file, reco=reco_info, histograms=histogramsi, settings=settings)
+    histograms = ClassifyEvents(root=root_file, reco=reco_info, histograms=histograms, settings=settings)
     print("CHECKPOINT: The histograms have been filled!")
 
     # OPEN OUTPUT FILE AND WRITE THE HISTOGRAMS
