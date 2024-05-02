@@ -1,0 +1,13 @@
+{
+	"even_root_path":   "/eos/user/m/moriolpe/mphys_project/root_files/final_analysis/matched_gn_pythia_4jets_even.root",
+	"odd_root_path":    "/eos/user/m/moriolpe/mphys_project/root_files/final_analysis/matched_gn_pythia_4jets_odd.root",
+	"even_pkl_path":    "/eos/user/m/moriolpe/mphys_project/root_files/final_analysis/reco_gn_pythia_4jets_even.pkl",
+	"odd_pkl_path":     "/eos/user/m/moriolpe/mphys_project/root_files/final_analysis/reco_gn_pythia_4jets_odd.pkl",
+	"even_tree_name":   "matched_even",
+	"odd_tree_name":    "matched_odd",
+
+	"n_simulated_events": 334551808,
+	"cross_section": 404.75357,
+
+    "output_root_path": "/eos/user/m/moriolpe/mphys_project/calibration/gn_pythia_histograms_4jets.root"	
+}

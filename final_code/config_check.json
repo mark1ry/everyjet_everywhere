@@ -1,0 +1,22 @@
+{
+	"read_root":        false,
+	"read_pickle":      true,
+	"output_pickle":    false,
+	"produce_plots":    true,
+
+	"even_root_path":   "",
+	"odd_root_path":    "",
+	"even_pkl_path":    "",
+	"odd_pkl_path":     "",
+	"even_tree_name":   "",
+	"odd_tree_name":    "",
+
+	"benhA_pkl":        "/eos/user/m/moriolpe/mphys_project/calibration/benhanced_a_4jets.pkl",
+	"benhB_pkl":        "/eos/user/m/moriolpe/mphys_project/calibration/benhanced_b_4jets.pkl",
+	"clenhA_pkl":       "/eos/user/m/moriolpe/mphys_project/calibration/clenhanced_a_4jets.pkl",
+	"clenhB_pkl":       "/eos/user/m/moriolpe/mphys_project/calibration/clenhanced_b_4jets.pkl",
+
+	"plots_path":       "/eos/user/m/moriolpe/mphys_project/trial",
+	"plot_extra_info":  "",
+	"log_scale":        true
+}
